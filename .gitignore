@@ -1,0 +1,11 @@
+**/.settings
+**/.project
+**/.classpath
+**/.springBeans
+**/.metadata
+**/.idea
+**/.factorypath
+**/*.iml
+**/target/**
+**/logs/**
+**/status/*.properties
