@@ -5,7 +5,7 @@ import { Member } from 'src/models/Member';
 @Component({
   selector: 'app-addmembers',
   templateUrl: './addmembers.component.html',
-  styleUrls: ['./addmembers.component.scss']
+  styleUrls: ['./addmembers.component.css']
 })
 export class AddmembersComponent implements OnInit {
   members: Member[] = [];

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-addmember-question',
   templateUrl: './addmember-question.component.html',
-  styleUrls: ['./addmember-question.component.scss']
+  styleUrls: ['./addmember-question.component.css']
 })
 export class AddmemberQuestionComponent implements OnInit {
 

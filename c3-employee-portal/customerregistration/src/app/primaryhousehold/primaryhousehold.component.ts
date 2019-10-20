@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Caregiver } from '../../models/caregiver';
+import { Caregiver } from '../../models/Caregiver';
 import { Router } from '@angular/router';
 
 @Component({
