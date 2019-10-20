@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ApiService } from '../api.service';
 import {Router} from '@angular/router';
+import {Service} from '../../models/service';
+import {Member} from '../../models/member';
 
 @Component({
   selector: 'app-phonelookup',
@@ -42,19 +44,35 @@ export class PhonelookupComponent implements OnInit {
 
   onSubmit() {
     if (this.phoneNumber.length === 10) {
-      sessionStorage.setItem('houseHoldName', 'Jesse Coddington');
+      const members = [];
+
+      this.apiService.lookupByPhoneNumber(this.phoneNumber)
+        .subscribe((data) => {
+          console.log(data);
+          sessionStorage.setItem('houseHoldName', data[0].caregiver.person.first_name + ' ' + data[0].caregiver.person.last_name);
+
+          members.push(
+            new Member(
+              data[0].caregiver.caregiver_id,
+              data[0].caregiver.person.first_name + ' ' + data[0].caregiver.person.last_name
+            )
+          );
+
+          let i;
+          // @ts-ignore
+          for (i = 0; i < data[0].dependents.length; i++) {
+            members.push(
+              new Member(
+                data[0].dependents[i].dependent_id,
+                data[0].dependents[i].person.first_name + ' ' + data[0].dependents[i].person.last_name
+              )
+            );
+          }
+
+          sessionStorage.setItem('memberLookup', JSON.stringify(members, null, 4));
+        });
 
       this.router.navigate(['verify']);
-      //
-      // this.apiService.lookupByPhoneNumber(this.phoneNumber)
-      //   .subscribe((data) => {
-      //
-      //   console.log(data);
-      //
-      //   sessionStorage.setItem('houseHoldName', 'Jesse Coddington');
-      //
-      //   window.location.href = 'verify';
-      // });
     } else {
       alert('Please enter a valid phone number.');
     }

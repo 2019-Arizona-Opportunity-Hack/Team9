@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Member} from '../../models/member';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,15 +8,11 @@ import {Router} from '@angular/router';
 })
 export class WhoneedsComponent implements OnInit {
   selected = [];
-  members = [
-    new Member(1, 'Jesse Coddington'),
-    new Member(2, 'Jake O.'),
-    new Member(3, 'Bill H.'),
-    new Member(4, 'Matt W.'),
-    new Member(5, 'Ty G.')
-  ];
+  members = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.members = JSON.parse(sessionStorage.getItem('memberLookup'));
+  }
 
   ngOnInit() { }
 
