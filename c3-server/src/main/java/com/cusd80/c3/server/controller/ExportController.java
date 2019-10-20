@@ -4,6 +4,8 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.tomcat.util.buf.StringUtils;
@@ -23,6 +25,7 @@ import com.cusd80.c3.server.repo.MemberRepository;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
 @RestController
+@Transactional
 @RequestMapping("export")
 public class ExportController implements ExportApi {
 

@@ -1,5 +1,6 @@
 package com.cusd80.c3.server.controller;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.cusd80.c3.server.mapper.ServiceMapper;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
 @RestController
+@Transactional
 @RequestMapping("services")
 public class ServiceController implements ServiceApi {
 

@@ -5,9 +5,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+
+import javax.transaction.Transactional;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -36,6 +39,7 @@ import com.cusd80.c3.server.repo.ServiceRepository;
 import com.cusd80.c3.server.vo.ImportResult;
 
 @RestController
+@Transactional
 @RequestMapping("import")
 public class ImportController implements ImportApi {
 
@@ -61,6 +65,7 @@ public class ImportController implements ImportApi {
     )
     public ImportResult importServices(@RequestParam("file") MultipartFile file) throws IOException {
         if (file.isEmpty()) throw new IOException("Empty File");
+        memberRepository.deleteAll();
         try (
             var csv = new CSVParser(
                 new InputStreamReader(file.getInputStream(), StandardCharsets.ISO_8859_1),
@@ -96,9 +101,9 @@ public class ImportController implements ImportApi {
             var csv = new CSVParser(
                 new InputStreamReader(file.getInputStream(), StandardCharsets.ISO_8859_1),
                 CSVFormat.EXCEL.withFirstRecordAsHeader()
+                    .withAllowMissingColumnNames()
                     .withIgnoreHeaderCase()
                     .withIgnoreEmptyLines()
-                    .withAllowMissingColumnNames()
             )
         ) {
             ImportResult result = new ImportResult();
@@ -109,7 +114,7 @@ public class ImportController implements ImportApi {
                 member.setType(MemberType.fromString(rec.get("type")));
                 member.setFirstName(rec.get("firstName"));
                 member.setLastName(rec.get("lastName"));
-                member.setBirthDate(LocalDate.parse(rec.get("birthDate")));
+                member.setBirthDate(parseDate(rec.get("birthDate")));
                 member.setAddress1(rec.get("address1"));
                 member.setAddress2(rec.get("address2"));
                 member.setCity(rec.get("city"));
@@ -120,8 +125,8 @@ public class ImportController implements ImportApi {
                 member.setMaritalStatus(rec.get("maritalStatus"));
                 member.setHousingType(rec.get("housingType"));
                 member.setEthnicity(rec.get("ethnicity"));
-                member.setSelfIdentify(rec.get("selfIdentify"));
-                member.setEducationLevel(rec.get("educationLevel"));
+                //member.setSelfIdentify(rec.get("selfIdentify"));
+                //member.setEducationLevel(rec.get("educationLevel"));
                 member.setLanguage(rec.get("language"));
                 member.setEmploymentType(rec.get("employmentType"));
                 member.setIncomeTypes(
@@ -136,7 +141,7 @@ public class ImportController implements ImportApi {
                 member.setChildCareType(rec.get("childCareType"));
                 member.setSpecialNeeds(rec.get("specialNeeds"));
                 member.setSchool(rec.get("school"));
-                member.setUpdateDate(LocalDateTime.parse(rec.get("updateDate")));
+                member.setUpdateDate(parseDateTime(rec.get("updateDate")));
 
                 if (member.getType() != MemberType.PRIMARY) {
                     member.setParentId(null);
@@ -178,6 +183,32 @@ public class ImportController implements ImportApi {
             });
             return result;
         }
+    }
+
+    private LocalDate parseDate(String str) {
+        LocalDate date = null;
+        if (date == null) try {
+            date = LocalDate.parse(str);
+        } catch (Exception ignore) {
+        }
+        if (date == null) try {
+            date = LocalDate.parse(str, DateTimeFormatter.ofPattern("M/d/yyyy"));
+        } catch (Exception ignore) {
+        }
+        return date;
+    }
+
+    private LocalDateTime parseDateTime(String str) {
+        LocalDateTime dateTime = null;
+        if (dateTime == null) try {
+            dateTime = LocalDateTime.parse(str);
+        } catch (Exception ignore) {
+        }
+        if (dateTime == null) try {
+            dateTime = ZonedDateTime.parse(str).toLocalDateTime();
+        } catch (Exception ignore) {
+        }
+        return dateTime;
     }
 
 }
