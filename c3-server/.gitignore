@@ -4,4 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+**/bootstrap-local.properties
+**/bootstrap-local.yml
 **/application-local.properties
+**/application-local.yml

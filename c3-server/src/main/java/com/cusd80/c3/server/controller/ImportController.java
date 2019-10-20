@@ -125,8 +125,8 @@ public class ImportController implements ImportApi {
                 member.setMaritalStatus(rec.get("maritalStatus"));
                 member.setHousingType(rec.get("housingType"));
                 member.setEthnicity(rec.get("ethnicity"));
-                //member.setSelfIdentify(rec.get("selfIdentify"));
-                //member.setEducationLevel(rec.get("educationLevel"));
+                member.setSelfIdentify(rec.get("selfIdentify"));
+                member.setEducationLevel(rec.get("educationLevel"));
                 member.setLanguage(rec.get("language"));
                 member.setEmploymentType(rec.get("employmentType"));
                 member.setIncomeTypes(
@@ -142,10 +142,6 @@ public class ImportController implements ImportApi {
                 member.setSpecialNeeds(rec.get("specialNeeds"));
                 member.setSchool(rec.get("school"));
                 member.setUpdateDate(parseDateTime(rec.get("updateDate")));
-
-                if (member.getType() != MemberType.PRIMARY) {
-                    member.setParentId(null);
-                }
 
                 memberRepository.save(member);
                 result.addRecordsImported(1);

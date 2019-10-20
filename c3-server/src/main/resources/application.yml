@@ -1,4 +1,12 @@
+server:
+  address: 0.0.0.0
+  port: ${PORT:8080}
+  error:
+    whitelabel:
+      enabled: false
 spring:
+  application:
+    name: c3-server
   datasource:
     url: ${JDBC_DATABASE_URL}
     username: ${JDBC_DATABASE_USERNAME}
@@ -6,5 +14,5 @@ spring:
   jpa:
     database: postgresql
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
