@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Service } from 'src/models/service';
 import { Router } from '@angular/router';
+import { C3ApiService } from '../c3-api.service';
 
 @Component({
   selector: 'app-report-service-selector',
@@ -9,27 +10,13 @@ import { Router } from '@angular/router';
 })
 export class ReportServiceSelectorComponent implements OnInit {
   selected: Service = null;
+  services;
 
-  services: Service[] = [
-    new Service(1, 'AHCCCS'),
-    new Service(2, 'CLASSES'),
-    new Service(3, 'DENTAL'),
-    new Service(4, 'DIAPERS'),
-    new Service(5, 'DENTAL SCREENING'),
-    new Service(6, 'FOOD BANK'),
-    new Service(7, 'IMMUNIZATIONS'),
-    new Service(8, 'MEDICAL'),
-    new Service(9, 'VISION & HEARING'),
-    new Service(10, 'WIC'),
-    new Service(11, 'THANKSGIVING'),
-    new Service(12, 'TOY DISTRIBUTION'),
-    new Service(13, 'THKG CHECK-IN'),
-    new Service(14, 'XMAS CHECK-IN')
-  ];
-
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private c3services: C3ApiService) { }
 
   ngOnInit() {
+    this.c3services.getServices().subscribe(results => this.services = results);
+    console.log(this.services);
   }
 
   select(service) {

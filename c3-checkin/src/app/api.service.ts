@@ -15,7 +15,7 @@ export class ApiService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Basic: ' + window.btoa('c3:12345')
+      Authorization: 'Basic ' + window.btoa('c3:12345')
     })
   };
 
@@ -25,7 +25,7 @@ export class ApiService {
   }
 
   getServices() {
-    // return this.http.get(this.baseUrl + '/services', this.httpOptions);
-    return this.http.get('./assets/data/services.json', this.httpOptions);
+    return this.http.get(this.baseUrl + '/services', this.httpOptions);
+    //return this.http.get('./assets/data/services.json', this.httpOptions);
   }
 }
