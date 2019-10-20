@@ -18,16 +18,10 @@ export class MembersearchComponent implements OnInit {
 
   public memberSearch() {
     this.results = [];
-    let member = new Member();
+    const member = new Member();
     member.firstName = 'Dennis';
     member.lastName = 'Kertis';
     member.dateOfBirth = '02/02/2018';
-    this.results.push(member);
-
-    member = new Member();
-    member.firstName = 'Jesse';
-    member.lastName = 'Coddington';
-    member.dateOfBirth = '01/01/2018';
     this.results.push(member);
   }
 
