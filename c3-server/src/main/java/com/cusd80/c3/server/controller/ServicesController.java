@@ -15,6 +15,7 @@ import com.cusd80.c3.server.mapper.ServiceMapper;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
 @RestController
+@Transactional
 public class ServicesController implements ServicesApi {
 
     @Autowired

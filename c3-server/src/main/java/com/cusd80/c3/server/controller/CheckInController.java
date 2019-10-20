@@ -3,6 +3,7 @@ package com.cusd80.c3.server.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.cusd80.c3.server.mapper.CheckInMapper;
 import com.cusd80.c3.server.repo.CheckInRepository;
 
 @RestController
+@Transactional
 public class CheckInController implements CheckInApi {
 
     @Autowired
