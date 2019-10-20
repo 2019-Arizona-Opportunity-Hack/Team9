@@ -47,3 +47,22 @@ img .imageFit {
   text-align: center;
   margin: 10px 0;
 }
+
+#mainForm {
+  padding: 15px;
+}
+
+#mainForm label {
+  display: block;
+}
+
+#mainForm .row {
+  margin-bottom: 10px;
+}
+
+.cccButton {
+  background-color: white;
+  margin: 10px 20px;
+  padding: 46px 34px;
+  cursor: pointer;
+}

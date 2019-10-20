@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Member } from 'src/models/Member';
 
 @Component({
   selector: 'app-membersearch',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class MembersearchComponent implements OnInit {
   lastName = '';
   dateOfBirth = '';
+  results: Member[] = [];
 
   constructor() { }
 
@@ -15,7 +17,7 @@ export class MembersearchComponent implements OnInit {
   }
 
   public memberSearch() {
-    console.log("searching...");
+    this.results.push(new Member());
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Member } from 'src/models/Member';
 
 @Component({
   selector: 'app-member-search-result',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./member-search-result.component.scss']
 })
 export class MemberSearchResultComponent implements OnInit {
-
+  results: Member[] = [];
   constructor() { }
 
   ngOnInit() {
   }
 
+  public memberSelect() {
+    console.log('in member select');
+  }
 }
