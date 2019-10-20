@@ -21,8 +21,8 @@ export class ApiService {
 
   lookupByPhoneNumber(phoneNumber) {
     phoneNumber = phoneNumber.slice(0, 3) + '-' + phoneNumber.slice(3, 6) + '-' + phoneNumber.slice(6);
-    // return this.http.get(this.baseUrl + '/families?phone_number=' + phoneNumber, this.httpOptions);
-    return this.http.get('./assets/data/families.json?phone_number=' + phoneNumber, this.httpOptions);
+    return this.http.get(this.baseUrl + '/families?phone_number=' + phoneNumber, this.httpOptions);
+    // return this.http.get('./assets/data/families.json?phone_number=' + phoneNumber, this.httpOptions);
   }
 
   getServices() {
