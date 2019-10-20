@@ -1,6 +1,6 @@
 package com.cusd80.c3.server.repo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -11,8 +11,8 @@ public interface CheckInRepository extends CrudRepository<CheckInEntity, String>
 
     List<CheckInEntity> findByServiceIdAndDateBetweenOrderByDate(
         String serviceId,
-        LocalDate startDate,
-        LocalDate endDate
+        LocalDateTime startDate,
+        LocalDateTime endDate
     );
 
 }
