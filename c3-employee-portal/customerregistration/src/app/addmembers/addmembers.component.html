@@ -1,0 +1,14 @@
+<app-header></app-header>
+
+<div class="inPageHeader">Add Household Members</div>
+
+<app-addmember *ngFor="let member of members"></app-addmember>
+
+<footer class="footer navbar navbar-expand-lg fixed-bottom navbar-light">
+    <div class="container ">
+      <div>
+        <button class="btn addBackground" (click)="onAddAnother()">Add Another Member</button>
+      </div>
+      <button class="btn btn-success" (click)="onSubmitMembers()">Submit</button>
+    </div>
+  </footer>
