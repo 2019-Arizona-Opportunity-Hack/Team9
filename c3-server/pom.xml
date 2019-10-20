@@ -82,8 +82,32 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/bootstrap-local.properties</exclude>
+            <exclude>**/bootstrap-local.yml</exclude>
+            <exclude>**/application-local.properties</exclude>
+            <exclude>**/application-local.yml</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.heroku.sdk</groupId>
+        <artifactId>heroku-maven-plugin</artifactId>
+        <version>2.0.12</version>
+        <configuration>
+          <appName>chandler-care-center</appName>
+          <jdkVersion>${java.version}</jdkVersion>
+          <processTypes>
+            <web>java $JAVA_OPTS -cp target/classes:target/dependency/* com.cusd80.c3.server.C3ServerApplication</web>
+          </processTypes>
+        </configuration>
       </plugin>
     </plugins>
   </build>
