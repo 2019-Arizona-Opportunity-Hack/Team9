@@ -3,7 +3,6 @@ package com.cusd80.c3.server.util;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -75,7 +74,9 @@ public class FamilyMapper {
 
         //inefficient but works...having some trouble getting the conversion right so went with a loop
         HashSet<String> set = new HashSet<String>();
-        for (IncomeType incomeType : family.getCaregiver().getIncomeTypes()) {
+        if (family != null && family.getCaregiver() != null && family.getCaregiver().getIncomeTypes() != null) for (
+            IncomeType incomeType : family.getCaregiver().getIncomeTypes()
+        ) {
             set.add(incomeType.toString());
         }
 
@@ -85,8 +86,7 @@ public class FamilyMapper {
         if (family.getCaregiver().getPerson().getDateOfBirth() == null) {
             throw new IllegalArgumentException("DOB was null. This value must be provided.");
         } else {
-            DateTimeFormatter dTF = DateTimeFormatter.ofPattern("yyyyMMdd");
-            member.setBirthDate(LocalDate.parse(family.getCaregiver().getPerson().getDateOfBirth(), dTF));
+            member.setBirthDate(DateUtil.parseDate(family.getCaregiver().getPerson().getDateOfBirth()));
         }
 
         return member;
@@ -97,7 +97,7 @@ public class FamilyMapper {
         List<Dependent> dependents = family.getDependents();
         List<MemberEntity> members = new ArrayList<MemberEntity>();
 
-        for (Dependent dependent : dependents) {
+        if (dependents != null) for (Dependent dependent : dependents) {
             member = new MemberEntity();
             member.setId(dependent.getDependentId());
             member.setType(MemberType.DEPENDENT);
