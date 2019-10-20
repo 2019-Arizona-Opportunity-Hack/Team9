@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./report-service-selector.component.scss']
 })
 export class ReportServiceSelectorComponent implements OnInit {
-  selected = [];
+  selected: Service = null;
 
-  services = [
+  services: Service[] = [
     new Service(1, 'AHCCCS'),
     new Service(2, 'CLASSES'),
     new Service(3, 'DENTAL'),
@@ -33,19 +33,15 @@ export class ReportServiceSelectorComponent implements OnInit {
   }
 
   select(service) {
-    if (this.selected.includes(service)) {
-      this.selected.splice(this.selected.indexOf(service), 1);
-    } else {
-      this.selected.push(service);
-    }
+    this.selected = service;
   }
 
   isActive(service) {
-    return this.selected.includes(service);
+    return service === this.selected;
   }
 
   onNextClick() {
-    sessionStorage.setItem('selectedReportServices', JSON.stringify(this.selected, null, 4));
+    sessionStorage.setItem('selectedReportService', JSON.stringify(this.selected, null, 4));
     this._router.navigate(['reportrun']);
   }
 }
