@@ -1,17 +1,128 @@
 <div id="mainForm">
-    <div class="row">
-      <div class="col">
-        <label for="member.lastName">Last Name *</label>
-        <input type="text" [(ngModel)]="member.lastName" />
+  <div class="row">
+    <div class="col">
+      <label for="member.lastName">Member Last Name *</label>
+      <input id="member.lastName" class="form-control" type="text" [(ngModel)]="member.lastName" />
+    </div>
+    <div class="col">
+      <label for="member.firstName">Member First Name *</label>
+      <input id="member.firstName" class="form-control" type="text" [(ngModel)]="member.firstName" />
+    </div>
+    <div class="col-2">
+      <label for="member.dateOfBirth">Member DOB *</label>
+      <input id="member.dateOfBirth" class="form-control" type="text" [(ngModel)]="member.dateOfBirth" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2">
+      <label for="member.gender">Gender</label>
+      <select id="member.gender" class="form-control" [(ngModel)]="member.gender">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="col-3">
+      <label for="member.primaryLanguage">Primary Language</label>
+      <select id="member.primaryLanguage" class="form-control" [(ngModel)]="member.primaryLanguage">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="col">
+      <label for="member.relationship">Relationship</label>
+      <select id="member.relationship" class="form-control" [(ngModel)]="member.relationship">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="col-2">
+      <label for="member.specialNeeds">Special Needs?</label>
+      <select id="member.specialNeeds" class="form-control" [(ngModel)]="member.specialNeeds">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="member.ethnicity">Member Ethnicity</label>
+      <select id="member.ethnicity" class="form-control" [(ngModel)]="member.ethnicity">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="col">
+      <label for="member.selfIdentifiesAs">Self-Identifies As</label>
+      <select id="member.selfIdentifiesAs" class="form-control" [(ngModel)]="member.selfIdentifiesAs">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="col-2">
+      <label for="member.school">School</label>
+      <input id="member.school" class="form-control" type="text" [(ngModel)]="member.school" />
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="member.medicalInsuranceType">Medical Insurance Type</label>
+      <select id="member.medicalInsuranceType" class="form-control" [(ngModel)]="member.medicalInsuranceType">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="col">
+      <label>Do You Have Primary Doctor?</label>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="member.hasPrimaryDoctor"> Yes
+        </label>
       </div>
-      <div class="col">
-        <label for="member.firstName">First Name *</label>
-        <input type="text" [(ngModel)]="member.firstName" />
-      </div>
-      <div class="col">
-        <label for="member.dateOfBirth">DOB *</label>
-        <input type="text" [(ngModel)]="member.dateOfBirth" />
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="member.hasPrimaryDoctor"> No
+        </label>
       </div>
     </div>
+    <div class="col-2">
+      <label>Dental Insurance?</label>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="member.dentalInsurance"> Yes
+        </label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="member.dentalInsurance"> No
+        </label>
+      </div>
+    </div>
+  </div>
 </div>
-<hr/>
+
+<hr />
