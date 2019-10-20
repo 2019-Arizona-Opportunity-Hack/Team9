@@ -1,23 +1,17 @@
 package com.cusd80.c3.server.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.cusd80.c3.api.FamilyApi;
+import com.cusd80.c3.api.model.Family;
+import com.cusd80.c3.server.entity.MemberEntity;
+import com.cusd80.c3.server.repo.MemberRepository;
 import com.cusd80.c3.server.util.FamilyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cusd80.c3.api.FamilyApi;
-import com.cusd80.c3.api.model.Caregiver;
-import com.cusd80.c3.api.model.Caregiver.ChildCareTypeEnum;
-import com.cusd80.c3.api.model.Dependent;
-import com.cusd80.c3.api.model.Family;
-import com.cusd80.c3.server.entity.MemberEntity;
-import com.cusd80.c3.server.repo.MemberRepository;
-
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class FamilyController implements FamilyApi {
@@ -27,15 +21,36 @@ public class FamilyController implements FamilyApi {
 
     @Override
     public ResponseEntity<Family> familyCaregiverIdGet(String caregiverId) {
-        return ResponseEntity.ok(mapFamily(memberRepository.findById(caregiverId).orElseThrow()));
+        Family daFamily;
+
+        //add the parent to the family
+        daFamily = FamilyMapper.fromCaregiverMember(memberRepository.findById(caregiverId).orElseThrow());
+
+        //find the dependents
+        List<MemberEntity> dependents = memberRepository.findByParentId(daFamily.getCaregiver().getCaregiverId());
+
+        //map the dependents to the appropriate data type
+        daFamily.setDependents(FamilyMapper.fromDependentMember(dependents));
+
+        return ResponseEntity.ok(daFamily);
     }
 
     @Override
     public ResponseEntity<Void> familyPost(@Valid Family family) {
+        return persistRecord(family);
+    }
+
+    @Override
+    public ResponseEntity<Void> familyCaregiverIdPut(String caregiverId, @Valid Family family) {
+        family.getCaregiver().setCaregiverId(caregiverId);
+        return persistRecord(family);
+    }
+
+    private ResponseEntity<Void>  persistRecord(Family family)
+    {
         //this try catch is rather lazy but it's a hackathon so...
         try {
-            MemberEntity memberParent = new MemberEntity();
-            MemberEntity memberChild = new MemberEntity();
+            MemberEntity memberParent;
 
             //get the parent and write it to the DB
             memberParent = FamilyMapper.toParentEntity(family);
@@ -60,19 +75,6 @@ public class FamilyController implements FamilyApi {
         {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    private Family mapFamily(MemberEntity member) {
-        Caregiver caregiver = new Caregiver();
-        caregiver.setCaregiverId(member.getId());
-        caregiver.setChildCareType(ChildCareTypeEnum.fromValue(member.getChildCareType()));
-
-        List<Dependent> dependents = new ArrayList<>();
-
-        Family family = new Family();
-        family.setCaregiver(caregiver);
-        family.setDependents(dependents);
-        return family;
     }
 
 }

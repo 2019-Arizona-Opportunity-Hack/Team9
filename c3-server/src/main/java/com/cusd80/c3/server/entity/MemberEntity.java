@@ -116,6 +116,9 @@ public class MemberEntity implements UUIDEntity {
     @Column(name = "school", nullable = true, length = 100)
     private String school;
 
+    @Column(name = "relationship_to_caregiver", nullable = true, length = 100)
+    private String relationshipToCaregiver;
+
     @Column(name = "update_date", nullable = false)
     private LocalDateTime updateDate;
 
