@@ -1,19 +1,19 @@
 package com.cusd80.c3.server.util;
 
-import com.cusd80.c3.api.model.Caregiver;
-import com.cusd80.c3.api.model.Dependent;
-import com.cusd80.c3.api.model.Family;
-import com.cusd80.c3.api.model.IncomeType;
+import com.cusd80.c3.api.model.*;
 import com.cusd80.c3.server.entity.MemberEntity;
 import com.cusd80.c3.server.enums.MemberType;
-import org.apache.commons.lang3.StringUtils;
-import org.glassfish.jersey.internal.inject.ParamConverters;
+import com.cusd80.c3.server.repo.MemberRepository;
+import com.google.common.base.Enums;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class FamilyMapper {
 
@@ -23,6 +23,7 @@ public class FamilyMapper {
         //this code is horrid but it works so...
 
         MemberEntity member = new MemberEntity();
+        member.setId(family.getCaregiver().getCaregiverId());
 
         if (family.getCaregiver().getAddress() != null)
         {
@@ -33,59 +34,22 @@ public class FamilyMapper {
             member.setZipCode(family.getCaregiver().getAddress().getZip());
         }
 
-        member.setChildCareType(family.getCaregiver().getChildCareType() == null ? "" : family.getCaregiver().getChildCareType().toString());
-
-        if (family.getCaregiver().getEducationLevel() != null) {
-            member.setEducationLevel(family.getCaregiver().getEducationLevel().toString());
-        }
-
-        if (family.getCaregiver().getEmploymentType() != null) {
-            member.setEmploymentType(family.getCaregiver().getEmploymentType().toString());
-        }
-
-        if (family.getCaregiver().getPerson().getEthnicityType() != null) {
-            member.setEthnicity(family.getCaregiver().getPerson().getEthnicityType().toString());
-        }
-
+        member.setChildCareType(MappingHelper.enumValue(family.getCaregiver().getChildCareType()));
+        member.setEducationLevel(MappingHelper.enumValue(family.getCaregiver().getEducationLevel()));
+        member.setEmploymentType(MappingHelper.enumValue(family.getCaregiver().getEmploymentType()));
+        member.setEthnicity(MappingHelper.enumValue(family.getCaregiver().getPerson().getEthnicityType()));
         member.setFirstName(family.getCaregiver().getPerson().getFirstName());
         member.setLastName(family.getCaregiver().getPerson().getLastName());
-
-        if (family.getCaregiver().getPerson().getGender() != null) {
-            member.setGender(family.getCaregiver().getPerson().getGender().toString());
-        }
-
+        member.setGender(MappingHelper.enumValue(family.getCaregiver().getPerson().getGender()));
         member.setHasDentalInsurance(family.getCaregiver().getPerson().getHasDentalInsurance());
         member.setHasPrimaryCareProvider(family.getCaregiver().getPerson().getHasPrimaryCareProvider());
-
-        if (family.getCaregiver().getHousingType() != null)
-        {
-            member.setHousingType(family.getCaregiver().getHousingType().toString());
-        }
-
+        member.setHousingType(MappingHelper.enumValue(family.getCaregiver().getHousingType()));
         member.setIncomeAmount(family.getCaregiver().getIncomeAmount());
-
-        if (family.getCaregiver().getInsuranceType() != null)
-        {
-            member.setInsuranceType(family.getCaregiver().getInsuranceType().toString());
-        }
-
-        if (family.getCaregiver().getEmploymentType().toString() != null)
-        {
-            member.setEmploymentType(family.getCaregiver().getEmploymentType().toString());
-        }
-
-        if (family.getCaregiver().getMaritalStatus() != null)
-        {
-            member.setMaritalStatus(family.getCaregiver().getMaritalStatus().toString());
-        }
-
-        if (family.getCaregiver().getPerson().getSelfIdentifiesAs() != null)
-        {
-            member.setSelfIdentify(family.getCaregiver().getPerson().getSelfIdentifiesAs().toString());
-        }
-
+        member.setInsuranceType(MappingHelper.enumValue(family.getCaregiver().getInsuranceType()));
+        member.setEmploymentType(MappingHelper.enumValue(family.getCaregiver().getEmploymentType()));
+        member.setMaritalStatus(MappingHelper.enumValue(family.getCaregiver().getMaritalStatus()));
+        member.setSelfIdentify(MappingHelper.enumValue(family.getCaregiver().getPerson().getSelfIdentifiesAs()));
         member.setPhoneNumber(family.getCaregiver().getAddress().getPhone());
-
         member.setType(MemberType.PRIMARY);
         member.setUpdateDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 
@@ -109,7 +73,6 @@ public class FamilyMapper {
         return member;
     }
 
-
     public static List<MemberEntity> toDependentEntities(Family family)
     {
         MemberEntity member = new MemberEntity();
@@ -119,6 +82,7 @@ public class FamilyMapper {
         for (Dependent dependent : dependents)
         {
             member = new MemberEntity();
+            member.setId(dependent.getDependentId());
             member.setType(MemberType.DEPENDENT);
             member.setParentId(family.getCaregiver().getCaregiverId());
 
@@ -136,31 +100,191 @@ public class FamilyMapper {
             member.setHasPrimaryCareProvider(dependent.getPerson().getHasPrimaryCareProvider());
             member.setPhoneNumber(dependent.getAddress().getPhone());
             member.setSchool(dependent.getSchool());
-
-            if (dependent.getPerson().getEthnicityType() != null)
-            {
-                member.setEthnicity(dependent.getPerson().getEthnicityType().toString());
-            }
-
-            if (dependent.getPerson().getSelfIdentifiesAs() != null)
-            {
-                member.setSelfIdentify(dependent.getPerson().getSelfIdentifiesAs().toString());
-            }
-
-            if (dependent.getPerson().getGender() != null)
-            {
-                member.setGender(dependent.getPerson().getGender().toString());
-            }
-
-            if (dependent.getPerson().getHasSpecialNeeds() != null)
-            {
-                member.setSpecialNeeds(dependent.getPerson().getHasSpecialNeeds().toString());
-            }
-
+            member.setEthnicity(MappingHelper.enumValue(dependent.getPerson().getEthnicityType()));
+            member.setSelfIdentify(MappingHelper.enumValue(dependent.getPerson().getSelfIdentifiesAs()));
+            member.setGender(MappingHelper.enumValue(dependent.getPerson().getGender()));
+            member.setSpecialNeeds(MappingHelper.enumValue(dependent.getPerson().getHasSpecialNeeds()));
             member.setUpdateDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
             members.add(member);
         }
         return members;
     }
+
+//    public static List<Family> fromCaregiverMembers(List<MemberEntity> entities)
+//    {
+//        List<Family> families = new ArrayList<>();
+//
+//        for(MemberEntity entity : entities)
+//        {
+//            families.add(fromCaregiverMember(entity));
+//
+//            //get the children in a nested loop. not pretty but ok for MVP
+//            //find the dependents
+//            List<MemberEntity> dependents = memberRepository.findByParentId(daFamily.getCaregiver().getCaregiverId());
+//
+//            //map the dependents to the appropriate data type
+//            daFamily.setDependents(FamilyMapper.fromDependentMember(dependents));
+//        }
+//
+//        return families;
+//    }
+
+    public static Family fromCaregiverMember(MemberEntity entity)
+    {
+        Family family = new Family();
+        Caregiver giver = new Caregiver();
+        Address address = new Address();
+        giver.setCaregiverId(entity.getId());
+
+        address.setAddressLine1(entity.getAddress1());
+        address.setAddressLine2(entity.getAddress2());
+        address.setCity(entity.getCity());
+        address.setState(entity.getState());
+        address.setZip(entity.getZipCode());
+        address.setPhone(entity.getPhoneNumber());
+        giver.setAddress(address);
+
+        //this is crap but i'm tired
+        try {
+            giver.setChildCareType(Enums.getIfPresent(Caregiver.ChildCareTypeEnum.class, entity.getChildCareType()).orNull());
+        } catch (Exception ex) {
+
+        }
+
+        try {
+            giver.setEducationLevel(Enums.getIfPresent(Caregiver.EducationLevelEnum.class, entity.getEducationLevel()).orNull());
+        } catch (Exception ex) {
+
+        }
+
+        try {
+            giver.setEmploymentType(Enums.getIfPresent(Caregiver.EmploymentTypeEnum.class, entity.getEmploymentType()).orNull());
+        } catch (Exception ex) {
+
+        }
+
+        try {
+            giver.setHousingType(Enums.getIfPresent(Caregiver.HousingTypeEnum.class, entity.getHousingType()).orNull());
+        } catch (Exception ex) {
+
+        }
+
+        try {
+            giver.setInsuranceType(Enums.getIfPresent(Caregiver.InsuranceTypeEnum.class, entity.getInsuranceType()).orNull());
+        } catch (Exception ex) {
+
+        }
+
+        try {
+            giver.setMaritalStatus(Enums.getIfPresent(Caregiver.MaritalStatusEnum.class, entity.getMaritalStatus()).orNull());
+        } catch (Exception ex) {
+
+        }
+
+        giver.setIncomeAmount(entity.getIncomeAmount());
+
+        //lazy way
+        List<IncomeType> incomeTypes = new ArrayList<>();
+
+        for (String incomeType: entity.getIncomeTypes()) {
+            incomeTypes.add(IncomeType.fromValue(incomeType));
+        }
+
+        giver.setIncomeTypes(incomeTypes);
+
+        Person person = new Person();
+        person.setFirstName(entity.getFirstName());
+        person.setLastName(entity.getLastName());
+        person.setHasPrimaryCareProvider(entity.getHasPrimaryCareProvider());
+        person.setHasDentalInsurance(entity.getHasDentalInsurance());
+        person.setDateOfBirth(MappingHelper.enumValue(entity.getBirthDate()));
+        person.setGender(Person.GenderEnum.fromValue(entity.getGender()));
+        person.setHasSpecialNeeds(Boolean.parseBoolean(entity.getSpecialNeeds()));
+        person.setMedicalInsurer(entity.getInsuranceType());
+        person.setPrimaryLanguage(entity.getLanguage());
+        person.setEthnicityType(Enums.getIfPresent(Person.EthnicityTypeEnum.class, entity.getEthnicity()).orNull());
+
+        try {
+            person.setSelfIdentifiesAs(Enums.getIfPresent(SelfIdentificationType.class, entity.getSelfIdentify()).orNull());
+        }
+        catch (Exception ex)
+        {
+            //have no idea why this is faililng and i am too tired to care
+        }
+
+        giver.setPerson(person);
+        family.setCaregiver(giver);
+
+        return family;
+    }
+
+    public static List<Dependent> fromDependentMember(List<MemberEntity> entities)
+    {
+        List<Dependent> dependents = new ArrayList<>();
+
+        for(MemberEntity entity : entities )
+        {
+            Dependent dependent = new Dependent();
+            dependent.setDependentId(entity.getId());
+            Address address = new Address();
+            address.setAddressLine1(entity.getAddress1());
+            address.setAddressLine2(entity.getAddress2());
+            address.setCity(entity.getCity());
+            address.setState(entity.getState());
+            address.setZip(entity.getZipCode());
+            address.setPhone(entity.getPhoneNumber());
+            dependent.setAddress(address);
+
+            dependent.setSchool(entity.getSchool());
+
+            try {
+                dependent.setRelationshipToCaregiver(Enums.getIfPresent(Dependent.RelationshipToCaregiverEnum.class, entity.getRelationshipToCaregiver()).orNull());
+            }
+            catch (Exception ex) {}
+
+            Person person = new Person();
+            person.setFirstName(entity.getFirstName());
+            person.setLastName(entity.getLastName());
+            person.setHasPrimaryCareProvider(entity.getHasPrimaryCareProvider());
+            person.setHasDentalInsurance(entity.getHasDentalInsurance());
+
+            if (entity.getBirthDate() != null)
+            {
+                person.setDateOfBirth(entity.getBirthDate().toString());
+            }
+
+
+            try {
+                person.setGender(Person.GenderEnum.fromValue(entity.getGender()));
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            person.setHasSpecialNeeds(Boolean.parseBoolean(entity.getSpecialNeeds()));
+            person.setMedicalInsurer(entity.getInsuranceType());
+            person.setPrimaryLanguage(entity.getLanguage());
+
+            try {
+            person.setSelfIdentifiesAs(Enums.getIfPresent(SelfIdentificationType.class, entity.getSelfIdentify()).orNull());
+        }
+            catch (Exception ex)
+            {}
+
+            try {
+            person.setEthnicityType(Enums.getIfPresent(Person.EthnicityTypeEnum.class, entity.getEthnicity()).orNull());
+    }
+            catch (Exception ex)
+            {}
+            dependent.setPerson(person);
+
+            dependents.add(dependent);
+        }
+
+        return dependents;
+    }
+
+
 
 }

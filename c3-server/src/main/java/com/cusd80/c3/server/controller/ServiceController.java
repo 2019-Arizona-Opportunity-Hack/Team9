@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import com.cusd80.c3.server.entity.ServiceEntity;
 import com.cusd80.c3.server.mapper.ServiceMapper;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
+@CrossOrigin
 @RestController
 @Transactional
 @RequestMapping("services")
