@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<div class="inPageHeader">Report Generator</div>
+
+<div class="inPageSubHeader">SELECT A SERVICE</div>
+
+<div class="container text-center">
+  <ol class="services-list list-inline">
+    <li class="list-inline-item col-md-3" *ngFor="let service of services" (click)="select(service)" [ngClass]="{active: isActive(service)}">
+      {{ service.name }}
+    </li>
+  </ol>
+
+  <div style="text-align: right;">
+    <button id="service-button" type="button" class="btn btn-green" (click)=onNextClick()>Next</button>
+  </div>
+</div>

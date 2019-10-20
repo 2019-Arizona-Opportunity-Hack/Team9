@@ -1,0 +1,31 @@
+export class Caregiver {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  phoneNumber: string;
+  gender: string;
+  maritalStatus: string;
+  primaryLanguage: string;
+  ethnicity: string;
+  selfIdentifiesAs: string;
+  housingType: string;
+  highestEducation: string;
+  employmentType: string;
+  monthlyIncome: number;
+  incomeType: string;
+  csfp: boolean;
+  wic: boolean;
+  snap: boolean;
+  tanf: boolean;
+  des: boolean;
+  qualityFirst: boolean;
+  other: boolean;
+  medicalInsuranceType: string;
+  hasPrimaryDoctor: string;
+  dentalInsurance: string;
+  childCareType: string;
+}

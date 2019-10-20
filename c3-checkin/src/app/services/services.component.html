@@ -1,0 +1,17 @@
+<nav class="navbar navbar-light" style="border-bottom: black solid 1px">
+  <span><a (click)="goHome()"><img src="./assets/images/logo.png" height="65" width="65" alt="Chandler Care Center"/></a></span>
+  <span class="steps">STEP 4 OF 4</span>
+</nav>
+<div class="container text-center">
+  <div class="large-text">Select Services for {{member}}:</div>
+
+  <ol class="services-list list-inline">
+    <li class="list-inline-item col-md-3" *ngFor="let service of services" (click)="select(service)" [ngClass]="{active: isActive(service)}">
+      {{ service.name }}
+    </li>
+  </ol>
+
+  <div align="right">
+    <button id="service-button" type="button" class="btn btn-green" (click)=onClick()>{{btnName}}</button>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<nav class="navbar navbar-light" style="border-bottom: black solid 1px">
+  <span><a (click)="goHome()"><img src="./assets/images/logo.png" height="65" width="65" alt="Chandler Care Center"/></a></span>
+  <span class="steps">STEP 2 OF 4</span>
+</nav>
+<div class="container text-center">
+  <div class="large-text">Are you {{houseHoldName}}?</div>
+
+  <div style="padding-top:40px">
+    <a (click)="goWhoNeeds()"><img src="./assets/images/checkmark.png" width="195" height="195"></a>
+    <a (click)="goPhoneLookup()"><img src="./assets/images/cancel.png" width="195" height="195"></a>
+  </div>
+</div>

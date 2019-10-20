@@ -1,0 +1,58 @@
+[
+  {
+    "service_id": "ahc",
+    "name": "AHCCCS"
+  },
+  {
+    "service_id": "cla",
+    "name": "CLASSES"
+  },
+  {
+    "service_id": "den",
+    "name": "DENTAL"
+  },
+  {
+    "service_id": "dia",
+    "name": "DIAPERS"
+  },
+  {
+    "service_id": "dens",
+    "name": "DENTAL SCREENING"
+  },
+  {
+    "service_id": "foo",
+    "name": "FOOD BANK"
+  },
+  {
+    "service_id": "imm",
+    "name": "IMMUNIZATIONS"
+  },
+  {
+    "service_id": "med",
+    "name": "MEDICAL"
+  },
+  {
+    "service_id": "vis",
+    "name": "VISION AND HEARING"
+  },
+  {
+    "service_id": "wic",
+    "name": "WIC"
+  },
+  {
+    "service_id": "tha",
+    "name": "THANKSGIVING"
+  },
+  {
+    "service_id": "toy",
+    "name": "TOY DISTRIBUTION"
+  },
+  {
+    "service_id": "thk",
+    "name": "THKG CHECK-IN"
+  },
+  {
+    "service_id": "xma",
+    "name": "XMAS CHECK-IN"
+  }
+]

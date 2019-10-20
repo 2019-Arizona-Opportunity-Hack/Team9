@@ -1,0 +1,93 @@
+[
+  {
+    "caregiver": {
+      "caregiver_id": "67d8dea6-874c-4a15-a44d-bf9599b99843",
+      "person": {
+        "first_name": "Dennis",
+        "last_name": "Kertis",
+        "date_of_birth": "2019-10-20",
+        "gender": "Male",
+        "medical_insurer": "Private",
+        "has_primary_care_provider": true,
+        "has_dental_insurance": false,
+        "has_special_needs": false,
+        "self_identifies_as": null,
+        "primary_language": null,
+        "ethnicity_type": null
+      },
+      "address": {
+        "address_line_1": "123 Some St",
+        "address_line_2": "",
+        "city": "Pittsburgh",
+        "state": "PA",
+        "zip": "15108",
+        "phone": "4564564564"
+      },
+      "income_amount": 45000,
+      "income_types": [
+        "WIC",
+        "TANF"
+      ],
+      "housing_type": null,
+      "education_level": "GED",
+      "employment_type": null,
+      "insurance_type": null,
+      "child_care_type": null,
+      "marital_status": null
+    },
+    "dependents": [
+      {
+        "dependent_id": "2cc751d3-a61d-4740-b65b-264a76a26ad3",
+        "person": {
+          "first_name": "Jesse",
+          "last_name": "Coddington",
+          "date_of_birth": "2000-10-02",
+          "gender": "Male",
+          "medical_insurer": null,
+          "has_primary_care_provider": true,
+          "has_dental_insurance": false,
+          "has_special_needs": true,
+          "self_identifies_as": null,
+          "primary_language": null,
+          "ethnicity_type": null
+        },
+        "address": {
+          "address_line_1": "123 Some St",
+          "address_line_2": "",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": "15108",
+          "phone": "1231231235"
+        },
+        "school": "Walker High",
+        "relationship_to_caregiver": null
+      },
+      {
+        "dependent_id": "3fb6798c-c1cd-47d8-a123-49812f204cba",
+        "person": {
+          "first_name": "Rob",
+          "last_name": "Stewart",
+          "date_of_birth": null,
+          "gender": "Male",
+          "medical_insurer": null,
+          "has_primary_care_provider": true,
+          "has_dental_insurance": false,
+          "has_special_needs": true,
+          "self_identifies_as": null,
+          "primary_language": null,
+          "ethnicity_type": null
+        },
+        "address": {
+          "address_line_1": "123 Some St",
+          "address_line_2": "",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zip": "15108",
+          "phone": "1231231234"
+        },
+        "school": "Walker High",
+        "relationship_to_caregiver": null
+      }
+    ]
+  }
+]

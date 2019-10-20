@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<div class="inPageHeader">Select an Option Below</div>
+
+<div class="row">
+  <div class="col d-flex justify-content-center">
+    <div (click)="addPersonClick()">
+      <img style="width: 300px; height: 322px; cursor: pointer;" src="../../assets/images/addperson.png" />
+      <div class="inPageSubHeader">Add New Member</div>
+    </div>
+  </div>
+  <div class="col d-flex justify-content-center">
+    <div (click)="editPersonClick()">
+      <img style="width: 300px; height: 322px; cursor: pointer;" src="../../assets/images/editperson.png" />
+      <div class="inPageSubHeader">Edit Existing Member</div>
+    </div>
+  </div>
+  <div class="col d-flex justify-content-center">
+    <div (click)="reportsClick()">
+      <img style="width: 300px; height: 322px; cursor: pointer;" src="../../assets/images/reports.png" />
+      <div class="inPageSubHeader">Generate Reports</div>
+    </div>
+  </div>
+</div>

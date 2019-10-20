@@ -1,0 +1,697 @@
+openapi: 3.0.0
+info:
+  description: Backend api utilized by the Chandler Care Center Customer registration
+    system and self check-in kiosk.
+  version: 3.0.0
+  title: C3 Registration API
+  contact:
+    email: jacob.omaits@dcsg.com
+    name: Dick's Sporting Goods
+tags:
+  - name: Service
+    description: Operations related to maintenance of service records.
+  - name: Family
+    description: Operations related to reading or writing caregiver and dependent records.
+  - name: Export
+    description: Operations that permit the bulk export of data.
+  - name: Import
+    description: Operations that permit the bulk import of data.
+  - name: Check-In
+    description: Operations related to the customer check-in process.
+paths:
+  /family/{caregiver_id}:
+    put:
+      tags:
+        - Family
+      summary: 'Update a caregiver and related dependents.'
+      parameters:
+        - in: path
+          name: caregiver_id   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The caregiver ID
+          example: 123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Family'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+    get:
+      tags:
+        - Family
+      summary: 'Returns a family that matches the provided caregiver id.'
+      parameters:
+        - in: path
+          name: caregiver_id   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The caregiver ID
+          example: 3fb6798c-c1cd-47d8-a123-49812f204cba
+      responses:
+        '200':
+          description: Returns a family that matches the given caregiver.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Family'
+            text/plain:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /family:
+    post:
+      tags:
+        - Family
+      summary: 'Create a new family consisting of a caregiver and optional dependents.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Family'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /export/report.csv:
+    get:
+      tags:
+        - Export
+      summary: "Does a bulk export of various demograpic details related to fulfilled services."
+      parameters:
+        - in: query
+          name: service_id
+          required: false
+          schema:
+            type: string
+          description: The service ID you'd like to report on.
+          example: wic
+        - in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+          description: The start of the report date range in ISO-8601 format.
+          example: 20191002T010101
+        - in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+          description: The end of the report date range in ISO-8601 format.
+          example: 20191002T010101
+      responses:
+        '200':
+          description: Exports a collection of services in CSV format.
+          content:
+            text/csv:
+              schema:
+                type: string
+                example: |
+                  first_name,last_name,service_id,service_name,check_in_date,gender,ethnicity,age
+                  Darrick,Meffen,wic,WIC,2019-08-14 07:12:03,M,Undisclosed,13
+                  Adolf,Acum,den,DENTAL,2019-03-24 21:42:30,M,Other,6
+                  Adolf,Acum,wic,WIC,2019-05-26 12:47:43,M,Other,6
+                  Branden,Chamberlin,den,DENTAL,2019-03-31 08:51:52,M,Other,11
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /export/services.csv:
+    get:
+      tags:
+        - Export
+      summary: "Does a bulk export of service data in CSV form."
+      responses:
+        '200':
+          description: Exports a collection of services in CSV format.
+          content:
+            text/csv:
+              schema:
+                type: string
+                example: |
+                  id,name,order,enabled
+                  ahc,AHCCCS,1,TRUE
+                  cla,CLASSES,2,TRUE
+                  den,DENTAL,3,TRUE
+                  dia,DIAPERS,4,TRUE
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /export/members.csv:
+    get:
+      tags:
+        - Export
+      summary: "Does a bulk export of member data in CSV form."
+      responses:
+        '200':
+          description: Exports a collection of services in CSV format.
+          content:
+            text/csv:
+              schema:
+                type: string
+              example: |
+                id,parentId,type,firstName,lastName,birthDate,address1,address2,city,state,zipCode,phoneNumber,gender,maritalStatus,housingType,ethnicity,language,employmentType,incomeTypes,incomeAmount,insuranceType,hasPrimaryCareProvider,hasDentalInsurance,childCareType,specialNeeds,school,updateDate
+                13,27,D,Merle,Giraudoux,8/15/2007,10 Glacier Hill Way,Hill,Flint,NY,48505,810-953-9883,Male,Married,Undisclosed,White/Anglo0,Spanish,None,Quality First Scholarship,41863,None,TRUE,FALSE,Family child care home,FALSE,University of Western Macedonia,2019-07-20T17:59:00Z
+                46,,P,Tirrell,Merredy,10/19/1986,99739 Bartillon Trail,Trail,Chicago,NY,60624,312-485-9953,Male,Married,Evacuee,White/Anglo0,English,Retired,Cash Assistant (TANF),26297,AHCCCS,FALSE,FALSE,My partner or I take care of my child(ren) at home,FALSE,University of Arkansas for Medical Sciences,2019-09-22T21:21:29Z
+                26,,P,Audry,Bulpitt,1/26/1994,466 Vernon Terrace,Pass,Des Moines,FL,50393,515-891-3481,Female,Single,Public Housing,White/Anglo,Other,Part-Time,Other,33442,Private,FALSE,TRUE,Head Start,TRUE,Tongmyung University of Information Technology,2019-01-08T16:46:52Z
+                32,,P,Ellary,Larvor,10/2/2010,57433 Transport Court,Hill,Atlanta,CA,31106,404-982-1699,Male,Divorced,Emergency Shelter/Mission/Transitional,Asian,Spanish,Retired,Supplemental Assistance WIC,33210,Other,TRUE,TRUE,Family child care home,TRUE,Abfi Institute Perbanas Jakarta,2019-04-11T13:53:18Z
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /export/checkins.csv:
+    get:
+      tags:
+        - Export
+      summary: "Does a bulk export of checkin data in CSV form."
+      responses:
+        '200':
+          description: Exports a collection of services in CSV format.
+          content:
+            text/csv:
+              schema:
+                type: string
+                example: |
+                  id,date,memberId,serviceId
+                  1,2019-05-01T19:17:14Z,51,imm
+                  2,2019-06-30T09:23:17Z,54,cla
+                  3,2019-03-01T19:19:31Z,76,cla
+                  4,2019-08-16T20:43:17Z,72,ahc
+                  5,2019-02-07T14:57:11Z,92,xma
+                  6,2018-10-22T13:20:01Z,41,foo
+                  7,2019-03-11T15:49:25Z,59,toy
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /import/families:
+    post:
+      tags:
+        - Import
+      summary: "Does a bulk import of family data from the provided CSV."
+      requestBody:
+        required: true
+        content:
+          application/csv:
+            schema:
+              type: string
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /families:
+    get:
+      tags:
+        - Family
+      summary: "Returns a list of families that meets the specified critiera."
+      responses:
+        '200':
+          description: A list of families
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Family'
+            text/plain:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+      parameters:
+        - name: last_name
+          in: query
+          description: Last name of caregiver
+          required: false
+          schema:
+            type: string
+          example: Kertis
+        - name: date_of_birth
+          in: query
+          description: Date of birth for caregiver in ISO-8601 format.
+          required: false
+          schema:
+            type: string
+          example: 20191020
+        - name: phone_number
+          in: query
+          description: The phone number for the caregiver with no special characters.
+          required: false
+          schema:
+            type: string
+          example: 7242732500
+  /service/{service_id}:
+    delete:
+      tags:
+        - Service
+      summary: 'Deletes a given service.'
+      parameters:
+        - name: service_id
+          in: path
+          description: The service that should be deleted
+          required: true
+          schema:
+            type: string
+          example: 3fb6798c-c1cd-47d8-a123-49812f204cba
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /service:
+    post:
+      tags:
+        - Service
+      summary: 'Create a new service.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /check_in:
+    post:
+      tags:
+        - Check-In
+      summary: 'Creates a new family check-in record.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Check_In'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /services:
+    get:
+      tags:
+        - Service
+      summary: 'Gets a list of all services.'
+      responses:
+        '200':
+          description: Returns list of enabled services in display order
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+servers:
+  - url: https://somedomain.com/v1
+components:
+  examples:
+    personExample:
+      value:
+        first_name: Dennis
+        last_name: Kertis
+        date_of_birth: 20191020
+        gender: Male
+        medical_insurer: Aetna
+        has_primary_care_provider: true
+        has_dental_insurance: false
+        has_special_needs: true
+        self_identifies_as: Veteran
+        primary_language: English
+        ethnicity_type: White/Anglo
+        summary: A sample object
+    addressExample:
+      value:
+        address_line_1: 345 Court St
+        address_line_2: Suite 1000
+        city: Coraopolis
+        state: PA
+        zip: 15108
+        phone: 7242735321
+  securitySchemes:
+    c3_auth:
+      type: http
+      scheme: basic
+  responses:
+    NotFound:
+      description: The specified resource was not found.
+    Unauthorized:
+      description: You are not authorized to access this resource.
+    Exception:
+      description: A system error has occurred and the request was not processed.
+    Created:
+      description: The request was processed successfully and the resource has been created.
+    BadRequest:
+      description: The request could not be understood by the server due to malformed data.
+    NotAllowed:
+      description: The server has not implemented the requested HTTP method.
+    OK:
+      description: The request has processed successfully.
+  schemas:
+    Family:
+      type: object
+      properties:
+        caregiver:
+          type: object
+          $ref: '#/components/schemas/Caregiver'
+        dependents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dependent'
+    Person:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        date_of_birth:
+          type: string
+        gender:
+          type: string
+          enum:
+            - Male
+            - Female
+        medical_insurer:
+          type: string
+        has_primary_care_provider:
+          type: boolean
+        has_dental_insurance:
+          type: boolean
+        has_special_needs:
+          type: boolean
+        self_identifies_as:
+          type: string
+          $ref: '#/components/schemas/Self_Identification_Type'
+        primary_language:
+          type: string
+        ethnicity_type:
+          type: string
+          description: Which ethnicity does the member relate to?
+          enum:
+            - White/Anglo
+            - Black/African_American
+            - Hispanic/Latino
+            - American_Indian/Native_American
+            - Asian
+            - Alaska_Native/Aleut/Eskimo
+            - Middle-Eastern/North-African
+            - Other
+            - Undisclosed
+      required:
+        - first_name
+        - last_name
+        - date_of_birth
+    Income_Type:
+      type: string
+      enum:
+        - FT
+        - CSFP
+        - WIC
+        - SNAP
+        - TANF
+        - DES_Childcare_Subsidy
+        - Quality_First_Scholar
+        - Other
+    Address:
+      type: object
+      properties:
+        address_line_1:
+          type: string
+        address_line_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+    Self_Identification_Type:
+      type: string
+      enum:
+        - Disability
+        - Veteren
+        - Mental_Illness
+        - Pregnant
+        - Postpartum
+        - Breastfeeding
+        - N/A
+        - Undisclosed
+        - Other
+        - Elderly_(62+)
+        - LGBTQ
+        - Female_Head_of_Household
+    Primary_Language:
+      type: string
+      description: What is the members primary language?
+      enum:
+        - English
+        - Spanish
+        - Other
+    Service:
+      type: object
+      properties:
+        service_id:
+          type: string
+        name:
+          type: string
+      required:
+        - name
+    Dependent:
+      type: object
+      example:
+        dependent_id: 3fb6798c-c1cd-47d8-a123-49812f204cba
+        school: Walker High
+        relationship_to_caregiver: Child
+      properties:
+        dependent_id:
+          type: string
+        person:
+          $ref: "#/components/schemas/Person"
+        address:
+          $ref: "#/components/schemas/Address"
+        school:
+          type: string
+        relationship_to_caregiver:
+          type: string
+          enum:
+            - Sibling
+            - Spouse
+            - Child
+            - Parent
+            - Guardian
+            - Grandparent
+            - Foster_Parent
+      required:
+        - person
+        - has_primary_care_provider
+        - has_dental_insurance
+        - has_special_needs
+    Check_In:
+      type: object
+      example:
+        member_id: 3fb6798c-c1cd-47d8-a123-49812f204cba
+        service_id: 3fb6798c-c1cd-47d8-a123-49812f204cba
+        created_date: 20191020T013132
+      properties:
+        member_id:
+          type: string
+          description: This is the caregiver or dependent id that corresponds to the person checking in for the given service. The field supports either ID since it is a UUID.
+        service_id:
+          type: string
+        created_date:
+          type: string
+      required:
+        - caregiver_id
+        - service_id
+        - created_date
+    Caregiver:
+      type: object
+      example:
+        caregiver_id: 123
+        income_amount: 45000
+        self_identified_as: Veteran
+        housing_type: Evacuee
+        education_level: GED
+        employment_type: None
+        insurance_type: Private
+        child_care_center: Head_Start
+        marital_status: Married
+        person:
+          $ref: '#/components/examples/personExample/value'
+      properties:
+        caregiver_id:
+          type: string
+        person:
+          $ref: "#/components/schemas/Person"
+        address:
+          $ref: "#/components/schemas/Address"
+        income_amount:
+          type: integer
+          format: int
+        income_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/Income_Type'
+        housing_type:
+          type: string
+          description: What type of housing is the member using?
+          enum:
+            - Emergency_Shelter/Mission/Transitional
+            - Evacuee
+            - Own_Home
+            - Other
+            - Private_Rental
+            - With_Family_Friends
+            - Public_Housing
+            - Youth_Home_Shelter
+            - Undisclosed
+            - Refugee
+            - Unhoused
+        education_level:
+          type: string
+          description: What is the members level of education?
+          enum:
+            - Grades_0-8
+            - Grades_9-11
+            - High_School_Diploma
+            - GED
+            - Post_Secondary
+            - Tradeschool
+            - 2_Year_Degree
+            - 4_Year_Degree
+            - Masters_Degree
+            - PhD
+            - Undisclosed
+        employment_type:
+          type: string
+          description: What is the members employment status?
+          enum:
+            - Post_Secondary_Student
+            - Full-Time
+            - Part-Time
+            - Retired
+            - None
+            - Disclosed
+            - Other
+        insurance_type:
+          type: string
+          description: What type of medical insurance does the member have?
+          enum:
+            - Employer
+            - Private
+            - AHCCCS
+            - Indian_Health_Services
+            - Military
+            - None
+            - Other
+        child_care_type:
+          type: string
+          description: What method of childcare does the family utilize?
+          enum:
+            - Parent/Partner_Care
+            - Head_Start
+            - Child_Care_Center/Preschool_Program
+            - Family_Child_Care_Home
+            - Relative/Neighbor_or_Babysitter
+        marital_status:
+          type: string
+          description: Marital status of the member.
+          enum:
+            - Single
+            - Married
+            - Divorced
+            - Separated
+            - Widowed
+            - Undisclosed
+      required:
+        - person
+      xml:
+        name: Member

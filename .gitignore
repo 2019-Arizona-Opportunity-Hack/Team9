@@ -1,11 +1,26 @@
-**/.settings
-**/.project
-**/.classpath
-**/.springBeans
-**/.metadata
-**/.idea
-**/.factorypath
-**/*.iml
-**/target/**
-**/logs/**
-**/status/*.properties
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+**/target
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
