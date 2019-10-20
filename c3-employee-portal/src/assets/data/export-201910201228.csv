@@ -1,0 +1,93 @@
+first_name,last_name,service_id,service_name,check_in_date,gender,ethnicity,age
+Adolf,Acum,den,DENTAL,3/24/19 21:42,M,Other,6
+Branden,Chamberlin,den,DENTAL,3/31/19 8:51,M,Other,11
+Guillema,Tolomio,den,DENTAL,8/28/19 3:28,F,Alaska Native/Aleut/Eskimo,72
+Oren,Vell,den,DENTAL,5/21/19 22:06,M,American Indian/Native American,57
+Percival,Quaife,den,DENTAL,3/18/19 21:24,M,Asian,73
+Mohandis,Weson,den,DENTAL,6/22/19 10:13,M,Middle-Eastern/North African,0
+Tymon,Dodge,den,DENTAL,11/5/18 0:03,M,White/Anglo,21
+Gayelord,Adamovitz,den,DENTAL,12/2/18 4:27,M,Pacific Islander,49
+Dalenna,Graith,den,DENTAL,11/6/18 1:46,F,Other,0
+Erna,Swiffen,den,DENTAL,5/7/19 21:35,F,Other,34
+Elsworth,Brampton,den,DENTAL,10/30/18 0:27,M,Other,45
+Antonino,Anderbrugge,den,DENTAL,6/26/19 6:44,M,White/Anglo,7
+Dulsea,Durbyn,den,DENTAL,7/17/19 18:52,F,Black/African American,9
+Foss,Alennikov,den,DENTAL,12/29/18 5:26,M,Middle-Eastern/North African,59
+Raimondo,Caroli,den,DENTAL,10/13/19 9:00,M,Asian,27
+Doyle,Pipet,den,DENTAL,9/12/19 2:35,M,Hispanic/Latino,69
+Lannie,Dank,den,DENTAL,12/16/18 6:55,M,White/Anglo,12
+Fayre,Minchinton,den,DENTAL,9/13/19 11:21,F,American Indian/Native American,1
+Xenia,Oliver,den,DENTAL,10/26/18 16:29,F,Asian,1
+Roda,De Carteret,den,DENTAL,5/8/19 11:30,F,Black/African American,13
+Gretchen,Slafford,den,DENTAL,12/6/18 5:37,F,White/Anglo,1
+Alanson,Habbershon,den,DENTAL,6/24/19 14:03,M,Asian,7
+Mile,Joutapaitis,den,DENTAL,7/4/19 16:03,M,Alaska Native/Aleut/Eskimo,28
+Alma,Marini,den,DENTAL,7/28/19 22:31,F,Asian,41
+Augustine,Bannell,den,DENTAL,8/20/19 21:30,M,Asian,26
+Jacob,Petera,den,DENTAL,5/1/19 0:16,M,White/Anglo,26
+Georgiana,Alabastar,den,DENTAL,4/22/19 8:41,F,Middle-Eastern/North African,25
+Rosabella,Schooley,den,DENTAL,2/21/19 20:54,F,American Indian/Native American,0
+Rosabella,Schooley,den,DENTAL,9/4/19 3:29,F,American Indian/Native American,0
+Thalia,Beall,den,DENTAL,5/24/19 3:09,F,Undisclosed,51
+Zedekiah,Dreher,den,DENTAL,10/4/19 3:48,M,Asian,37
+Northrup,Dumbrall,den,DENTAL,2/12/19 6:07,M,Alaska Native/Aleut/Eskimo,78
+Dorthea,Abotson,den,DENTAL,6/2/19 23:03,F,Hispanic/Latino,19
+Catriona,Joslow,den,DENTAL,4/6/19 8:10,F,Black/African American,15
+Phebe,Drayn,den,DENTAL,3/29/19 19:14,F,Other,69
+Tymothy,Syms,den,DENTAL,12/20/18 3:10,M,Middle-Eastern/North African,27
+Walt,Robben,den,DENTAL,5/18/19 15:12,M,Alaska Native/Aleut/Eskimo,44
+Duff,Rowlin,den,DENTAL,7/13/19 16:57,M,Pacific Islander,44
+Sheila-kathryn,Bontein,den,DENTAL,4/14/19 14:51,F,Asian,81
+Electra,Reddin,den,DENTAL,1/31/19 11:13,F,Black/African American,37
+Electra,Reddin,den,DENTAL,8/31/19 14:27,F,Black/African American,37
+Rozina,Sebrook,den,DENTAL,12/18/18 14:32,F,Pacific Islander,0
+Camellia,De Cruz,den,DENTAL,6/10/19 11:12,F,Asian,2
+Yurik,Tapson,den,DENTAL,11/27/18 14:24,M,White/Anglo,8
+Hugh,La Wille,den,DENTAL,8/27/19 14:13,M,Asian,69
+Homere,Westgate,den,DENTAL,3/1/19 13:39,M,Other,32
+Lockwood,Bohlje,den,DENTAL,1/28/19 11:32,M,Middle-Eastern/North African,10
+Pedro,Floris,den,DENTAL,6/4/19 23:04,M,Middle-Eastern/North African,0
+Fonsie,Peniello,den,DENTAL,11/6/18 9:08,M,Alaska Native/Aleut/Eskimo,22
+Garret,Flawith,den,DENTAL,12/3/18 3:21,M,Asian,13
+Horten,Whiting,den,DENTAL,11/3/18 8:08,M,Undisclosed,89
+Wilburt,Yeardsley,den,DENTAL,12/5/18 1:41,M,American Indian/Native American,15
+Charles,O'Dare,den,DENTAL,5/31/19 19:37,M,Black/African American,2
+Ermengarde,Renfrew,den,DENTAL,6/10/19 6:42,F,White/Anglo,47
+Lara,Struys,den,DENTAL,2/24/19 2:13,F,White/Anglo,7
+Katheryn,Clevely,den,DENTAL,1/3/19 22:04,F,Middle-Eastern/North African,2
+Suzette,Gerling,den,DENTAL,5/16/19 22:04,F,Asian,70
+Jeanelle,Shimoni,den,DENTAL,1/24/19 17:41,F,Middle-Eastern/North African,0
+Saidee,Badgers,den,DENTAL,3/2/19 12:33,F,Pacific Islander,8
+Bernadette,Chattey,den,DENTAL,8/4/19 19:48,F,Asian,12
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+s,,,,,,,
