@@ -3,9 +3,10 @@ package com.cusd80.c3.server.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cusd80.c3.api.ServicesApi;
@@ -14,7 +15,6 @@ import com.cusd80.c3.server.mapper.ServiceMapper;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
 @RestController
-@RequestMapping("services")
 public class ServicesController implements ServicesApi {
 
     @Autowired
@@ -24,9 +24,12 @@ public class ServicesController implements ServicesApi {
     private ServiceMapper serviceMapper;
 
     @Override
+    @Transactional
     public ResponseEntity<List<Service>> servicesGet() {
         return ResponseEntity.ok(
-            serviceRegistry.findAllEnabledEqualsTrue().map(serviceMapper::fromEntity).collect(Collectors.toList())
+            serviceRegistry.findByEnabledOrderBySortOrder(true)
+                .map(serviceMapper::fromEntity)
+                .collect(Collectors.toList())
         );
     }
 

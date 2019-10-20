@@ -1,7 +1,6 @@
 package com.cusd80.c3.server.controller;
 
 import javax.validation.Valid;
-import javax.ws.rs.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cusd80.c3.api.ServiceApi;
 import com.cusd80.c3.api.model.Service;
+import com.cusd80.c3.server.entity.ServiceEntity;
 import com.cusd80.c3.server.mapper.ServiceMapper;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
@@ -31,8 +31,9 @@ public class ServiceController implements ServiceApi {
 
     @Override
     public ResponseEntity<Void> serviceServiceIdDelete(String serviceId) {
-        if (!serviceRegistry.existsById(serviceId)) throw new NotFoundException();
-        serviceRegistry.deleteById(serviceId);
+        ServiceEntity service = serviceRegistry.findById(serviceId).orElseThrow();
+        service.setEnabled(false);
+        serviceRegistry.save(service);
         return ResponseEntity.ok().build();
     }
 

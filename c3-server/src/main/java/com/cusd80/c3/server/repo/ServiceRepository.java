@@ -8,6 +8,6 @@ import com.cusd80.c3.server.entity.ServiceEntity;
 
 public interface ServiceRepository extends CrudRepository<ServiceEntity, String> {
 
-    Stream<ServiceEntity> findAllEnabledEqualsTrue();
+    Stream<ServiceEntity> findByEnabledOrderBySortOrder(boolean enabled);
     
 }
