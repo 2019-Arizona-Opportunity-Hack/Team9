@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class ApiService {
-
   // Base url
   baseUrl = 'https://chandler-care-center.herokuapp.com';
 
@@ -15,8 +14,8 @@ export class ApiService {
   // Http Headers
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': btoa('c3:12345')
+      'Content-Type': 'application/json',
+      Authorization: 'Basic: ' + window.btoa('c3:12345')
     })
   };
 
