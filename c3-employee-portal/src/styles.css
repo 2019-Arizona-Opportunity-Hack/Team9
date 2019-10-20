@@ -32,7 +32,6 @@ img .imageFit {
 }
 
 .inPageHeader{
-  font-family: Roboto;
   font-weight: bold;
   font-size: 48px;
   text-align: center;
@@ -40,7 +39,6 @@ img .imageFit {
 }
 
 .inPageSubHeader{
-  font-family: Roboto;
   font-weight: bold;
   font-size: 30px;
   text-align: center;
