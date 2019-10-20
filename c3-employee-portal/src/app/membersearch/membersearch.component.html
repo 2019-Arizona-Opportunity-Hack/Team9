@@ -6,26 +6,29 @@
   <div class="row">
     <div class="col">
       <label for="lastName">Last Name</label>
-      <input type="text" [(ngModel)]="lastName" />
+      <input id="lastName" name="lastName" class="form-control" type="text" />
     </div>
     <div class="col">
       <label for="dateOfBirth">Date of Birth (MM/DD/YYYY)</label>
-      <input type="text" [(ngModel)]="dateOfBirth" />
+      <input id="dateOfBirth" name="dateOfBirth" class="form-control" type="text" />
     </div>
-    <div class="col align-items-center">
-      <button class="btn btn-green" (click)="memberSearch()">Search</button>
+    <div class="col">
+      <label for="phoneNumber">Phone Number</label>
+      <input id="phoneNumber" name="phoneNumber" class="form-control" type="text" />
     </div>
-</div>
+    <div class="col-2 align-items-center">
+      <br />
+      <button class="btn btn-green form-control" style="margin-top:3px" (click)="memberSearch()">Search</button>
+    </div>
+  </div>
 
-<div *ngIf="results.length > 0" class="inPageSubHeader" style="text-align: left;">{{results.length}} Results</div>
-
-<div class="container">
+  <div *ngIf="results.length > 0" class="inPageSubHeader" style="text-align: left;">{{results.length}} Results</div>
   <div *ngIf="results.length > 0">
     <div class="row">
-      <div class="col">
+      <div class="col-5">
         <label>Last Name</label>
       </div>
-      <div class="col">
+      <div class="col-5">
         <label>Date of Birth (MM/DD/YYYY)</label>
       </div>
       <div class="col">
@@ -33,7 +36,8 @@
       </div>
     </div>
   </div>
-
-  <app-member-search-result *ngFor="let result of results" [result]="result"></app-member-search-result>
+  <app-member-search-result class="members-list" *ngFor="let result of results" [result]="result"></app-member-search-result>
 
 </div>
+
+

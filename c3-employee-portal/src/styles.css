@@ -101,3 +101,16 @@ img .imageFit {
   background-color: #00580E !important;
   color: #FFFFFF;
 }
+
+.members-list {
+  padding: 0;
+  margin: 5px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.members-list-row {
+  background-color: #FFFFFF;
+  margin: 5px;
+  padding: 20px;
+}
