@@ -17,14 +17,23 @@
     </div>
 </div>
 
-<div *ngIf="results" class="inPageSubHeader">{{results.count}}</div>
+<div *ngIf="results.length > 0" class="inPageSubHeader">{{results.length}} Results</div>
 
-<div *ngFor="let result of results">
-  <div class="row">
-    <div class="col">
-      <label>Last Name</label>
+<div class="container">
+  <div *ngIf="results.length > 0">
+    <div class="row">
+      <div class="col">
+        <label>Last Name</label>
+      </div>
+      <div class="col">
+        <label>Date of Birth (MM/DD/YYYY)</label>
+      </div>
+      <div class="col">
+        <label>&nbsp;</label>
+      </div>
     </div>
-    <div class="col">
-      <label>Date of Birth (MM/DD/YYYY)</label>
-    </div>
+  </div>
+
+  <app-member-search-result *ngFor="let result of results"></app-member-search-result>
+
 </div>

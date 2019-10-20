@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Member } from 'src/models/Member';
 
 @Component({
@@ -7,7 +7,6 @@ import { Member } from 'src/models/Member';
   styleUrls: ['./member-search-result.component.scss']
 })
 export class MemberSearchResultComponent implements OnInit {
-  results: Member[] = [];
   constructor() { }
 
   ngOnInit() {
