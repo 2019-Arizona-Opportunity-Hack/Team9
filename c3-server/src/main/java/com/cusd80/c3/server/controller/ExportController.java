@@ -3,6 +3,7 @@ package com.cusd80.c3.server.controller;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
@@ -67,12 +69,15 @@ public class ExportController implements ExportApi {
 
     @RequestMapping(path = "report.csv", method = RequestMethod.GET, produces = CSV_VALUE)
     public ResponseEntity<StreamingResponseBody> exportReport(
-        @Valid String serviceId,
-        @Valid String startDate,
-        @Valid String endDate
+        @Valid @RequestParam("service_id") String serviceId,
+        @Valid @RequestParam("start_date") String startDate,
+        @Valid @RequestParam("end_date") String endDate
     )
     {
         return ResponseEntity.ok().contentType(CSV).body(out -> {
+            var s = DateUtil.parseDate(startDate).atStartOfDay(ZoneId.systemDefault()).toLocalDateTime();
+            var e = DateUtil.parseDate(endDate).plusDays(1).atStartOfDay(ZoneId.systemDefault()).toLocalDateTime();
+            var res = checkInRepository.findByServiceIdAndDateBetweenOrderByDate(serviceId, s, e);
             try (
                 var csv = new CSVPrinter(
                     new OutputStreamWriter(out, StandardCharsets.ISO_8859_1),
@@ -88,13 +93,7 @@ public class ExportController implements ExportApi {
                     )
                 )
             ) {
-                for (
-                    var checkIn : checkInRepository.findByServiceIdAndDateBetweenOrderByDate(
-                        serviceId,
-                        DateUtil.parseDate(startDate),
-                        DateUtil.parseDate(endDate)
-                    )
-                ) {
+                for (var checkIn : res) {
                     var rec = memberRepository.findById(checkIn.getMemberId()).orElse(null);
                     if (rec != null) {
                         csv.printRecord(
