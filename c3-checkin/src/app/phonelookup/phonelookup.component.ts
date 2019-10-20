@@ -42,7 +42,7 @@ export class PhonelookupComponent implements OnInit {
 
       sessionStorage.setItem('houseHoldName', 'Jesse Coddington');
 
-      window.location.href = '/verify';
+      window.location.href = 'verify';
     } else {
       alert('Please enter a valid phone number.');
     }

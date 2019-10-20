@@ -38,7 +38,7 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit() {
     if (this.selectedMember == null) {
-      window.location.href = '/login';
+      window.location.href = 'login';
     }
   }
 
@@ -94,9 +94,9 @@ export class ServicesComponent implements OnInit {
       sessionStorage.setItem('servicesByMember', JSON.stringify(servicesByMember, null, 4));
 
       if (this.whoNeeds.length > 0) {
-        window.location.href = '/services';
+        window.location.href = 'services';
       } else {
-        window.location.href = '/thanks';
+        window.location.href = 'thanks';
       }
     } else {
       alert('Please select the services needed.');

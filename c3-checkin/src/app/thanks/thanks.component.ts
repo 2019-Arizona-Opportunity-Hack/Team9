@@ -18,6 +18,6 @@ export class ThanksComponent implements OnInit, AfterViewInit {
   }
 
   myTimer() {
-    window.location.href = '/login';
+    window.location.href = 'login';
   }
 }
