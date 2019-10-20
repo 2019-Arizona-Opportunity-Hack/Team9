@@ -101,6 +101,54 @@ paths:
           $ref: '#/components/responses/NotAllowed'
         '500':
           $ref: '#/components/responses/Exception'
+  /export/report.csv:
+    get:
+      tags:
+        - Export
+      summary: "Does a bulk export of various demograpic details related to fulfilled services."
+      parameters:
+        - in: query
+          name: service_id
+          required: false
+          schema:
+            type: string
+          description: The service ID you'd like to report on.
+          example: wic
+        - in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+          description: The start of the report date range in ISO-8601 format.
+          example: 20191002T010101
+        - in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+          description: The end of the report date range in ISO-8601 format.
+          example: 20191002T010101
+      responses:
+        '200':
+          description: Exports a collection of services in CSV format.
+          content:
+            text/csv:
+              schema:
+                type: string
+                example: |
+                  first_name,last_name,service_id,service_name,check_in_date,gender,ethnicity,age
+                  Darrick,Meffen,wic,WIC,2019-08-14 07:12:03,M,Undisclosed,13
+                  Adolf,Acum,den,DENTAL,2019-03-24 21:42:30,M,Other,6
+                  Adolf,Acum,wic,WIC,2019-05-26 12:47:43,M,Other,6
+                  Branden,Chamberlin,den,DENTAL,2019-03-31 08:51:52,M,Other,11
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
   /export/services.csv:
     get:
       tags:
