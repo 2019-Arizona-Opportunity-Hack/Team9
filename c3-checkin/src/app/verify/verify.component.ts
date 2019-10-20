@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-verify',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerifyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goHome() {
+    this.router.navigate(['login']);
+  }
+
+  goWhoNeeds() {
+    this.router.navigate(['whoneeds']);
+  }
+
+  goPhoneLookup() {
+    this.router.navigate(['phonelookup']);
   }
 
   get houseHoldName(): any {

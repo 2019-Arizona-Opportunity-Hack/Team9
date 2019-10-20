@@ -33,6 +33,10 @@ export class WhoneedsComponent implements OnInit {
     return this.selected.includes(member);
   }
 
+  goHome() {
+    this.router.navigate(['login']);
+  }
+
   onClick() {
     if (this.selected.length > 0) {
       sessionStorage.setItem('whoNeeds', JSON.stringify(this.selected, null, 4));

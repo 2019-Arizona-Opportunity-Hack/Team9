@@ -36,6 +36,10 @@ export class PhonelookupComponent implements OnInit {
     return this.phoneNumber;
   }
 
+  goHome() {
+    this.router.navigate(['login']);
+  }
+
   onSubmit() {
     if (this.phoneNumber.length === 10) {
       sessionStorage.setItem('houseHoldName', 'Jesse Coddington');

@@ -15,10 +15,9 @@ export class ThanksComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setInterval(this.myTimer, 5000);
-  }
-
-  myTimer() {
-    this.router.navigate(['login']);
+    const myinterval = setInterval(() => {
+      clearInterval(myinterval);
+      this.router.navigate(['login']);
+    }, 5000);
   }
 }

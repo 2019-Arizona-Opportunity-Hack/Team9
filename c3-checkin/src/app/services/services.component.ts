@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Service} from '../../models/service';
 import {Member} from '../../models/member';
 import {ServicesByMember} from '../../models/servicesByMember';
-import {FormBuilder} from '@angular/forms';
 import {ApiService} from '../api.service';
 import {Router} from '@angular/router';
 
@@ -18,6 +17,8 @@ export class ServicesComponent implements OnInit {
   services = [];
 
   constructor(private apiService: ApiService, private router: Router) {
+    this.services = [];
+
     this.apiService.getServices()
       .subscribe((data) => {
         let i;
@@ -34,7 +35,7 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit() {
     if (this.selectedMember == null) {
-      window.location.href = 'login';
+      this.router.navigate(['login']);
     }
   }
 
@@ -62,35 +63,38 @@ export class ServicesComponent implements OnInit {
     }
   }
 
+  goHome() {
+    this.router.navigate(['login']);
+  }
+
   onClick() {
     if (this.selected.length > 0) {
-      let services = [];
+      let lservices = [];
       const servicesByMember = [];
       const existingServicesByMember = JSON.parse(sessionStorage.getItem('servicesByMember'));
 
       if (existingServicesByMember !== null) {
         let i;
         for (i = 0; i < existingServicesByMember.length; i++) {
-          services = [];
+          lservices = [];
           let j;
           for (j = 0; j < existingServicesByMember[i].service.length; j++) {
-            services.push(new Service(existingServicesByMember[i].service[j].id, existingServicesByMember[i].service[j].name));
+            lservices.push(new Service(existingServicesByMember[i].service[j].id, existingServicesByMember[i].service[j].name));
           }
-          servicesByMember.push(new ServicesByMember(existingServicesByMember[i].id, services));
+          servicesByMember.push(new ServicesByMember(existingServicesByMember[i].id, lservices));
         }
       }
 
-      services = [];
+      lservices = [];
       let k;
       for (k = 0; k < this.selected.length; k++) {
-        services.push(new Service(this.selected[k].id, this.selected[k].name));
+        lservices.push(new Service(this.selected[k].id, this.selected[k].name));
       }
-      servicesByMember.push(new ServicesByMember(this.selectedMember.id, services));
-
+      servicesByMember.push(new ServicesByMember(this.selectedMember.id, lservices));
       sessionStorage.setItem('servicesByMember', JSON.stringify(servicesByMember, null, 4));
 
       if (this.whoNeeds.length > 0) {
-        this.router.navigate(['services']);
+        location.reload();
       } else {
         this.router.navigate(['thanks']);
       }
