@@ -194,24 +194,30 @@
         </select>
       </div>
       <div class="col">
-        <label for="caregiver.hasPrimaryDoctor">Do You Have Primary Doctor?</label>
-        <select id="caregiver.hasPrimaryDoctor" class="form-control" [(ngModel)]="caregiver.hasPrimaryDoctor">
-          <option></option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-        </select>
+        <label>Do You Have Primary Doctor?</label>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="caregiver.hasPrimaryDoctor"> Yes
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="caregiver.hasPrimaryDoctor"> No
+          </label>
+        </div>
       </div>
       <div class="col-2">
-        <label for="caregiver.dentalInsurance">Dental Insurance?</label>
-        <select id="caregiver.dentalInsurance" class="form-control" [(ngModel)]="caregiver.dentalInsurance">
-          <option></option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-        </select>
+        <label>Dental Insurance?</label>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="caregiver.dentalInsurance"> Yes
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="caregiver.dentalInsurance"> No
+          </label>
+        </div>
       </div>
     </div>
 
