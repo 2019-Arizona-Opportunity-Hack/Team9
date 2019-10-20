@@ -29,7 +29,7 @@ import com.cusd80.c3.server.repo.ServiceRepository;
 @RequestMapping("export")
 public class ExportController implements ExportApi {
 
-    public static final String CSV_VALUE = "test/csv";
+    public static final String CSV_VALUE = "text/csv";
     public static final MediaType CSV = MediaType.parseMediaType(CSV_VALUE);
 
     @Autowired
