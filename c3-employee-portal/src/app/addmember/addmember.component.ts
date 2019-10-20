@@ -12,6 +12,6 @@ export class AddmemberComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.member = new Member();
   }
-
 }

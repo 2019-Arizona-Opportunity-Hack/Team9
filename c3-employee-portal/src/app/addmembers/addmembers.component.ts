@@ -22,7 +22,5 @@ export class AddmembersComponent implements OnInit {
 
   public onAddAnother() {
     this.members.push(new Member());
-
-    window.scrollTo(0, 9999);
   }
 }
