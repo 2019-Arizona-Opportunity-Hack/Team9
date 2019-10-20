@@ -26,6 +26,6 @@ export class ApiService {
 
   getServices() {
     return this.http.get(this.baseUrl + '/services', this.httpOptions);
-    //return this.http.get('./assets/data/services.json', this.httpOptions);
+    // return this.http.get('./assets/data/services.json', this.httpOptions);
   }
 }
