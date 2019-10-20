@@ -7,30 +7,30 @@
     <div class="row">
       <div class="col">
         <label for="caregiver.lastName">Caregiver Last Name *</label>
-        <input id="caregiver.lastName" name="caregiver.lastName" class="form-control" type="text" [(ngModel)]="caregiver.lastName" />
+        <input id="caregiver.lastName" name="caregiver.lastName" class="form-control" type="text" value="Kertis" />
       </div>
       <div class="col">
         <label for="caregiver.firstName">Caregiver First Name *</label>
-        <input id="caregiver.firstName" name="caregiver.firstName" class="form-control" type="text" [(ngModel)]="caregiver.firstName" />
+        <input id="caregiver.firstName" name="caregiver.firstName" class="form-control" type="text" value="Dennis" />
       </div>
       <div class="col-2">
         <label for="caregiver.dateOfBirth">Caregiver DOB *</label>
-        <input id="caregiver.dateOfBirth" name="caregiver.dateOfBirth" class="form-control" type="text" [(ngModel)]="caregiver.dateOfBirth" />
+        <input id="caregiver.dateOfBirth" name="caregiver.dateOfBirth" class="form-control" type="text" value="05/30/1972" />
       </div>
     </div>
 
     <div class="row">
       <div class="col">
         <label for="caregiver.address">Caregiver Address *</label>
-        <input id="caregiver.address" name="caregiver.address" class="form-control" type="text" [(ngModel)]="caregiver.address" />
+        <input id="caregiver.address" name="caregiver.address" class="form-control" type="text" value="345 Court Street" />
       </div>
       <div class="col-3">
         <label for="caregiver.city">City *</label>
-        <input id="caregiver.city" name="caregiver.city" class="form-control" type="text" [(ngModel)]="caregiver.city" />
+        <input id="caregiver.city" name="caregiver.city" class="form-control" type="text" value="Coraopolis" />
       </div>
       <div class="col-2">
         <label for="caregiver.state">State *</label>
-        <select id="caregiver.state" name="caregiver.state" class="form-control" [(ngModel)]="caregiver.state">
+        <select id="caregiver.state" name="caregiver.state" class="form-control">
           <option></option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
@@ -70,7 +70,7 @@
           <option value="OH">Ohio</option>
           <option value="OK">Oklahoma</option>
           <option value="OR">Oregon</option>
-          <option value="PA">Pennsylvania</option>
+          <option value="PA" selected="selected">Pennsylvania</option>
           <option value="RI">Rhode Island</option>
           <option value="SC">South Carolina</option>
           <option value="SD">South Dakota</option>
@@ -87,28 +87,28 @@
       </div>
       <div class="col-2">
         <label for="caregiver.zipCode">Zip Code *</label>
-        <input id="caregiver.zipCode" name="caregiver.zipCode" class="form-control" type="text" [(ngModel)]="caregiver.zipCode" />
+        <input id="caregiver.zipCode" name="caregiver.zipCode" class="form-control" type="text" value="15108" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-3">
         <label for="caregiver.phoneNumber">Phone Number *</label>
-        <input id="caregiver.phoneNumber" name="caregiver.phoneNumber" class="form-control" type="text" [(ngModel)]="caregiver.phoneNumber" />
+        <input id="caregiver.phoneNumber" name="caregiver.phoneNumber" class="form-control" type="text" value="15108" />
       </div>
       <div class="col-2">
         <label for="caregiver.gender">Gender</label>
-        <select id="caregiver.gender" name="caregiver.gender" class="form-control" [(ngModel)]="caregiver.gender">
+        <select id="caregiver.gender" name="caregiver.gender" class="form-control">
           <option></option>
-          <option>Male</option>
+          <option selected="selected">Male</option>
           <option>Female</option>
         </select>
       </div>
       <div class="col">
         <label for="caregiver.maritalStatus">Marital Status</label>
-        <select id="caregiver.maritalStatus" name="caregiver.maritalStatus" class="form-control" [(ngModel)]="caregiver.maritalStatus">
+        <select id="caregiver.maritalStatus" name="caregiver.maritalStatus" class="form-control">
           <option></option>
-          <option>Single</option>
+          <option selected="selected">Single</option>
           <option>Married</option>
           <option>Divorced</option>
           <option>Separated</option>
@@ -118,10 +118,10 @@
       </div>
       <div class="col-2">
         <label for="caregiver.primaryLanguage">Primary Language</label>
-        <select id="caregiver.primaryLanguage" name="caregiver.primaryLanguage" class="form-control" [(ngModel)]="caregiver.primaryLanguage">
+        <select id="caregiver.primaryLanguage" name="caregiver.primaryLanguage" class="form-control">
           <option></option>
           <option>English</option>
-          <option>Spanish</option>
+          <option selected="selected">Spanish</option>
           <option>Other</option>
         </select>
       </div>
@@ -130,9 +130,9 @@
     <div class="row">
       <div class="col">
         <label for="caregiver.ethnicity">Caregiver Ethnicity</label>
-        <select id="caregiver.ethnicity" name="caregiver.ethnicity" class="form-control" [(ngModel)]="caregiver.ethnicity">
+        <select id="caregiver.ethnicity" name="caregiver.ethnicity" class="form-control">
           <option></option>
-          <option>White</option>
+          <option selected="selected">White</option>
           <option>Black</option>
           <option>Hispanic</option>
           <option>Asian</option>
@@ -141,18 +141,18 @@
       </div>
       <div class="col">
         <label for="caregiver.selfIdentifiesAs">Self-Identifies As</label>
-        <select id="caregiver.selfIdentifiesAs" name="caregiver.selfIdentifiesAs" class="form-control" [(ngModel)]="caregiver.selfIdentifiesAs">
+        <select id="caregiver.selfIdentifiesAs" name="caregiver.selfIdentifiesAs" class="form-control">
           <option></option>
           <option>Male</option>
           <option>Female</option>
-          <option>Other</option>
+          <option selected="selected">Male</option>
         </select>
       </div>
       <div class="col-2">
         <label for="caregiver.housingType">Housing Type</label>
-        <select id="caregiver.housingType" name="caregiver.housingType" class="form-control" [(ngModel)]="caregiver.housingType">
+        <select id="caregiver.housingType" name="caregiver.housingType" class="form-control">
           <option></option>
-          <option>Emergency Shelter/Mission/Transitional</option>
+          <option selected="selected">Emergency Shelter/Mission/Transitional</option>
           <option>Evacuee</option>
           <option>Own Home</option>
           <option>Other</option>
@@ -163,11 +163,11 @@
     <div class="row">
       <div class="col-5">
         <label for="caregiver.highestEducation">Highest Education Completed</label>
-        <select id="caregiver.highestEducation" name="caregiver.highestEducation" class="form-control" [(ngModel)]="caregiver.highestEducation">
+        <select id="caregiver.highestEducation" name="caregiver.highestEducation" class="form-control">
           <option></option>
           <option>Grades 0-8</option>
           <option>Grades 9-11</option>
-          <option>High School Diploma</option>
+          <option selected="selected">High School Diploma</option>
           <option>GED</option>
           <option>Post Secondary</option>
           <option>Tradeschool</option>
@@ -180,13 +180,13 @@
       </div>
       <div class="col-5">
         <label for="caregiver.employmentType">Employment Type</label>
-        <select id="caregiver.employmentType" name="caregiver.employmentType" class="form-control" [(ngModel)]="caregiver.employmentType">
+        <select id="caregiver.employmentType" name="caregiver.employmentType" class="form-control">
           <option></option>
           <option>Post Secondary Student</option>
           <option>Full-Time</option>
           <option>Part-Time</option>
           <option>Retired</option>
-          <option>None</option>
+          <option selected="selected">None</option>
           <option>Disclosed</option>
           <option>Other</option>
         </select>
@@ -203,7 +203,7 @@
         </div>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="checkbox" name="caregiver.incomeType.wic" class="form-check-input"> WIC
+            <input type="checkbox" name="caregiver.incomeType.wic" class="form-check-input" checked="checked"> WIC
           </label>
         </div>
         <div class="form-check-inline">
@@ -223,7 +223,7 @@
         </div>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="checkbox" name="caregiver.incomeType.qfs" class="form-check-input"> Quality First Scholar
+            <input type="checkbox" name="caregiver.incomeType.qfs" class="form-check-input" checked="checked"> Quality First Scholar
           </label>
         </div>
         <div class="form-check-inline">
@@ -234,18 +234,18 @@
       </div>
       <div class="col-5">
         <label for="caregiver.monthlyIncome">Monthly Income Amount ($)</label>
-        <input id="caregiver.monthlyIncome" name="caregiver.monthlyIncome" class="form-control" type="text" [(ngModel)]="caregiver.monthlyIncome" />
+        <input id="caregiver.monthlyIncome" name="caregiver.monthlyIncome" class="form-control" type="text" value="34,000"/>
       </div>
     </div>
 
     <div class="row">
       <div class="col">
         <label for="caregiver.medicalInsuranceType">Medical Insurance Type</label>
-        <select id="caregiver.medicalInsuranceType" name="caregiver.medicalInsuranceType" class="form-control" [(ngModel)]="caregiver.medicalInsuranceType">
+        <select id="caregiver.medicalInsuranceType" name="caregiver.medicalInsuranceType" class="form-control">
           <option></option>
           <option>Employer</option>
           <option>Private</option>
-          <option>AHCCCS</option>
+          <option selected="selected">AHCCCS</option>
           <option>Indian Health Services</option>
           <option>Military</option>
           <option>None</option>
@@ -256,12 +256,12 @@
         <label>Do You Have Primary Doctor?</label>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.medicalInsuranceType" value="yes" class="form-check-input" [(ngModel)]="caregiver.hasPrimaryDoctor"> Yes
+            <input type="radio" name="caregiver.medicalInsuranceType" value="yes" class="form-check-input" /> Yes
           </label>
         </div>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.medicalInsuranceType" value="no" class="form-check-input" [(ngModel)]="caregiver.hasPrimaryDoctor"> No
+            <input type="radio" name="caregiver.medicalInsuranceType" value="no" class="form-check-input" checked="checked" /> No
           </label>
         </div>
       </div>
@@ -269,12 +269,12 @@
         <label>Dental Insurance?</label>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.dentalInsurance" value="yes" class="form-check-input" [(ngModel)]="caregiver.dentalInsurance"> Yes
+            <input type="radio" name="caregiver.dentalInsurance" value="yes" class="form-check-input" /> Yes
           </label>
         </div>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.dentalInsurance" value="no" class="form-check-input" [(ngModel)]="caregiver.dentalInsurance"> No
+            <input type="radio" name="caregiver.dentalInsurance" value="no" class="form-check-input" checked="checked" /> No
           </label>
         </div>
       </div>
@@ -283,7 +283,7 @@
     <div class="row">
       <div class="col-5">
         <label for="caregiver.childCareType">Child Care Type</label>
-        <select id="caregiver.childCareType" name="caregiver.childCareType" class="form-control" [(ngModel)]="caregiver.childCareType">
+        <select id="caregiver.childCareType" name="caregiver.childCareType" class="form-control">
           <option></option>
           <option>Parent/Partner Care</option>
           <option>Head Start</option>
