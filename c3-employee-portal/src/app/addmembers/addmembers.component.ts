@@ -10,14 +10,14 @@ import { Member } from 'src/models/member';
 export class AddmembersComponent implements OnInit {
   members: Member[] = [];
 
-  constructor(private _router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.members.push(new Member());
   }
 
   public onSubmitMembers() {
-    this._router.navigate(['success']);
+    this.router.navigate(['success']);
   }
 
   public onAddAnother() {

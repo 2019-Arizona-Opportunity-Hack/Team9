@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
 })
 export class AddmemberQuestionComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   public onYes() {
-    this._router.navigate(['addmembers']);
+    this.router.navigate(['addmembers']);
   }
 
   public onNo() {
-    this._router.navigate(['success']);
+    this.router.navigate(['success']);
   }
 }
