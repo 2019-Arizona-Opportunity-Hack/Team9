@@ -3,14 +3,10 @@ info:
   description: Backend api utilized by the Chandler Care Center Customer registration
     system and self check-in kiosk.
   version: 3.0.0
-  title: Chandler Care Center
-  termsOfService: http://swagger.io/terms/
+  title: C3 Registration API
   contact:
     email: jacob.omaits@dcsg.com
     name: Dick's Sporting Goods
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
 tags:
   - name: Service
     description: Operations related to maintenance of service records.
@@ -22,9 +18,6 @@ tags:
     description: Operations that permit the bulk import of data.
   - name: Check-In
     description: Operations related to the customer check-in process.
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
 paths:
   /family/{caregiver_id}:
     put:
@@ -108,33 +101,79 @@ paths:
           $ref: '#/components/responses/NotAllowed'
         '500':
           $ref: '#/components/responses/Exception'
-  /export/families:
+  /export/services.csv:
     get:
       tags:
         - Export
-      summary: "Does a bulk export of family data in CSV form for a given range of data."
-      parameters:
-        - name: start_date
-          in: query
-          description: The start date for the range of data for which you'd like to export. Use ISO-8601 format.
-          required: false
-          schema:
-            type: string
-          example: 20191020T013132
-        - name: end_date
-          in: query
-          description: The end date for the range of data for which you'd like to export. Use ISO-8601 format.
-          required: false
-          schema:
-            type: string
-          example: 20191028T013132
+      summary: "Does a bulk export of service data in CSV form."
       responses:
         '200':
-          description: Exports a collection of families in CSV format.
+          description: Exports a collection of services in CSV format.
           content:
             text/csv:
               schema:
                 type: string
+                example: |
+                  id,name,order,enabled
+                  ahc,AHCCCS,1,TRUE
+                  cla,CLASSES,2,TRUE
+                  den,DENTAL,3,TRUE
+                  dia,DIAPERS,4,TRUE
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /export/members.csv:
+    get:
+      tags:
+        - Export
+      summary: "Does a bulk export of member data in CSV form."
+      responses:
+        '200':
+          description: Exports a collection of services in CSV format.
+          content:
+            text/csv:
+              schema:
+                type: string
+              example: |
+                id,parentId,type,firstName,lastName,birthDate,address1,address2,city,state,zipCode,phoneNumber,gender,maritalStatus,housingType,ethnicity,language,employmentType,incomeTypes,incomeAmount,insuranceType,hasPrimaryCareProvider,hasDentalInsurance,childCareType,specialNeeds,school,updateDate
+                13,27,D,Merle,Giraudoux,8/15/2007,10 Glacier Hill Way,Hill,Flint,NY,48505,810-953-9883,Male,Married,Undisclosed,White/Anglo0,Spanish,None,Quality First Scholarship,41863,None,TRUE,FALSE,Family child care home,FALSE,University of Western Macedonia,2019-07-20T17:59:00Z
+                46,,P,Tirrell,Merredy,10/19/1986,99739 Bartillon Trail,Trail,Chicago,NY,60624,312-485-9953,Male,Married,Evacuee,White/Anglo0,English,Retired,Cash Assistant (TANF),26297,AHCCCS,FALSE,FALSE,My partner or I take care of my child(ren) at home,FALSE,University of Arkansas for Medical Sciences,2019-09-22T21:21:29Z
+                26,,P,Audry,Bulpitt,1/26/1994,466 Vernon Terrace,Pass,Des Moines,FL,50393,515-891-3481,Female,Single,Public Housing,White/Anglo,Other,Part-Time,Other,33442,Private,FALSE,TRUE,Head Start,TRUE,Tongmyung University of Information Technology,2019-01-08T16:46:52Z
+                32,,P,Ellary,Larvor,10/2/2010,57433 Transport Court,Hill,Atlanta,CA,31106,404-982-1699,Male,Divorced,Emergency Shelter/Mission/Transitional,Asian,Spanish,Retired,Supplemental Assistance WIC,33210,Other,TRUE,TRUE,Family child care home,TRUE,Abfi Institute Perbanas Jakarta,2019-04-11T13:53:18Z
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/NotAllowed'
+        '500':
+          $ref: '#/components/responses/Exception'
+  /export/checkins.csv:
+    get:
+      tags:
+        - Export
+      summary: "Does a bulk export of checkin data in CSV form."
+      responses:
+        '200':
+          description: Exports a collection of services in CSV format.
+          content:
+            text/csv:
+              schema:
+                type: string
+                example: |
+                  id,date,memberId,serviceId
+                  1,2019-05-01T19:17:14Z,51,imm
+                  2,2019-06-30T09:23:17Z,54,cla
+                  3,2019-03-01T19:19:31Z,76,cla
+                  4,2019-08-16T20:43:17Z,72,ahc
+                  5,2019-02-07T14:57:11Z,92,xma
+                  6,2018-10-22T13:20:01Z,41,foo
+                  7,2019-03-11T15:49:25Z,59,toy
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -328,14 +367,8 @@ components:
         phone: 7242735321
   securitySchemes:
     c3_auth:
-      type: oauth2
-      description: Utilizes gmail federated login process to assign scopes.
-      flows:
-        implicit:
-          authorizationUrl: http://google.com
-          scopes:
-            write:member: Create and update member data
-            read:member: View member data
+      type: http
+      scheme: basic
   responses:
     NotFound:
       description: The specified resource was not found.
@@ -535,6 +568,10 @@ components:
         income_amount:
           type: integer
           format: int
+        income_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/Income_Type'
         housing_type:
           type: string
           description: What type of housing is the member using?
