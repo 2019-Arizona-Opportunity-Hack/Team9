@@ -127,7 +127,9 @@ public class MemberEntity implements UUIDEntity {
     @PreUpdate
     @PrePersist
     private void onUpdate() {
-        updateDate = LocalDateTime.now();
+        if (updateDate == null) {
+            updateDate = LocalDateTime.now();
+        }
     }
 
 }

@@ -1,8 +1,5 @@
 package com.cusd80.c3.server.controller;
 
-import static com.cusd80.c3.server.C3ServerConstants.CSV;
-import static com.cusd80.c3.server.C3ServerConstants.CSV_VALUE;
-
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
@@ -13,19 +10,24 @@ import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import com.cusd80.c3.api.ExportApi;
 import com.cusd80.c3.server.repo.CheckInRepository;
 import com.cusd80.c3.server.repo.MemberRepository;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
 @RestController
 @RequestMapping("export")
-public class ExportController {
+public class ExportController implements ExportApi {
+
+    public static final String CSV_VALUE = "test/csv";
+    public static final MediaType CSV = MediaType.parseMediaType(CSV_VALUE);
 
     @Autowired
     private ServiceRepository serviceRepository;
