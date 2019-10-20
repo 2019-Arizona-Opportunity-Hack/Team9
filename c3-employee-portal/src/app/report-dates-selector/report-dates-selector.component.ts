@@ -7,12 +7,18 @@ import { Service } from 'src/models/service';
   styleUrls: ['./report-dates-selector.component.scss']
 })
 export class ReportDatesSelectorComponent implements OnInit {
-  selectedService;
+  selectedService: Service;
+  startDate: string;
+  endDate: string;
   constructor() { }
 
   ngOnInit() {
     this.selectedService = JSON.parse(sessionStorage.getItem('selectedReportService'));
-    console.log(this.selectedService);
   }
 
+  onGenerate() {
+    console.log(this.selectedService);
+    console.log(this.startDate);
+    console.log(this.endDate);
+  }
 }
