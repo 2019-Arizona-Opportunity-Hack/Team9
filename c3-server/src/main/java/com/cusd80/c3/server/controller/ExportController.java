@@ -2,6 +2,7 @@ package com.cusd80.c3.server.controller;
 
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -24,6 +25,7 @@ import com.cusd80.c3.api.ExportApi;
 import com.cusd80.c3.server.repo.CheckInRepository;
 import com.cusd80.c3.server.repo.MemberRepository;
 import com.cusd80.c3.server.repo.ServiceRepository;
+import com.cusd80.c3.server.util.DateUtil;
 
 @RestController
 @Transactional
@@ -86,8 +88,26 @@ public class ExportController implements ExportApi {
                     )
                 )
             ) {
-                for (var rec : serviceRepository.findAll()) {
-                    csv.printRecord(rec.getId(), rec.getName(), rec.getSortOrder(), rec.isEnabled());
+                for (
+                    var checkIn : checkInRepository.findByServiceIdAndDateBetweenOrderByDate(
+                        serviceId,
+                        DateUtil.parseDate(startDate),
+                        DateUtil.parseDate(endDate)
+                    )
+                ) {
+                    var rec = memberRepository.findById(checkIn.getMemberId()).orElse(null);
+                    if (rec != null) {
+                        csv.printRecord(
+                            rec.getFirstName(),
+                            rec.getLastName(),
+                            serviceId,
+                            null,
+                            checkIn.getDate(),
+                            rec.getGender(),
+                            rec.getEthnicity(),
+                            LocalDate.now().getYear() - rec.getBirthDate().getYear()
+                        );
+                    }
                 }
             }
         });
