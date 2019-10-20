@@ -19,10 +19,10 @@ export class MembersearchComponent implements OnInit {
   public memberSearch() {
     this.results = [];
     const member = new Member();
+    member.id = '1';
     member.firstName = 'Dennis';
     member.lastName = 'Kertis';
     member.dateOfBirth = '02/02/2018';
     this.results.push(member);
   }
-
 }
