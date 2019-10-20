@@ -83,10 +83,11 @@ img .imageFit {
 .services-list li {
   padding: 0;
   margin: 5px;
-  background-color: #F3F2F2;
+  background-color: #FFFFFF;
   line-height: 70px;
   text-align: center;
   border: gray 1px solid;
+  cursor: pointer;
 }
 
 .active {
