@@ -27,8 +27,8 @@
       <div class="col">
         <label for="caregiver.city">City *</label>
         <input id="caregiver.city" class="form-control" type="text" [(ngModel)]="caregiver.city" />
-        <label for="caregiver.state">State *</label>
-        <input id="caregiver.state" class="form-control" type="text" [(ngModel)]="caregiver.state" />
+<!--        <label for="caregiver.state">State *</label>-->
+<!--        <input id="caregiver.state" class="form-control" type="text" [(ngModel)]="caregiver.state" />-->
       </div>
       <div class="col-2">
         <label for="caregiver.zipCode">Zip Code *</label>
@@ -40,8 +40,8 @@
       <div class="col">
         <label for="caregiver.phoneNumber">Phone Number *</label>
         <input id="caregiver.phoneNumber" class="form-control" type="text" [(ngModel)]="caregiver.phoneNumber" />
-        <label for="caregiver.gender">Gender</label>
-        <input id="caregiver.gender" class="form-control" type="text" [(ngModel)]="caregiver.gender" />
+<!--        <label for="caregiver.gender">Gender</label>-->
+<!--        <input id="caregiver.gender" class="form-control" type="text" [(ngModel)]="caregiver.gender" />-->
       </div>
       <div class="col">
         <label for="caregiver.maritalStatus">Marital Status</label>
@@ -53,58 +53,68 @@
       </div>
     </div>
 
-  <!-- <div class="row">
-    <div class="col">
-      <label for="caregiver.lastName">Caregiver Last Name *</label>
-      <input type="text" [(ngModel)]="caregiver.lastName" />
+    <div class="row">
+      <div class="col">
+        <label for="caregiver.ethnicity">Caregiver Ethnicity</label>
+        <input id="caregiver.ethnicity" class="form-control" type="text" [(ngModel)]="caregiver.ethnicity" />
+      </div>
+      <div class="col">
+        <label for="caregiver.selfIdentifiesAs">Self-Identifies As</label>
+        <input id="caregiver.selfIdentifiesAs" class="form-control" type="text" [(ngModel)]="caregiver.selfIdentifiesAs" />
+      </div>
+      <div class="col-2">
+        <label for="caregiver.housingType">Housing Type</label>
+        <input id="caregiver.housingType" class="form-control" type="text" [(ngModel)]="caregiver.housingType" />
+      </div>
     </div>
-    <div class="col">
 
+    <div class="row">
+      <div class="col">
+        <label for="caregiver.highestEducation">Highest Education Completed</label>
+        <input id="caregiver.highestEducation" class="form-control" type="text" [(ngModel)]="caregiver.highestEducation" />
+      </div>
+      <div class="col">
+        <label for="caregiver.employmentType">Employment Type</label>
+        <input id="caregiver.employmentType" class="form-control" type="text" [(ngModel)]="caregiver.employmentType" />
+      </div>
     </div>
-    <div class="col">
 
+    <div class="row">
+      <div class="col-5">
+        <label for="caregiver.incomeType">Income Type</label>
+        <input id="caregiver.incomeType" class="form-control" type="text" [(ngModel)]="caregiver.incomeType" />
+      </div>
+      <div class="col-5">
+        <label for="caregiver.monthlyIncome">Monthly Income Amount ($)</label>
+        <input id="caregiver.monthlyIncome" class="form-control" type="text" [(ngModel)]="caregiver.monthlyIncome" />
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <label for="caregiver.lastName">Caregiver Last Name *</label>
-      <input type="text" [(ngModel)]="caregiver.lastName" />
+    <div class="row">
+      <div class="col">
+        <label for="caregiver.medicalInsuranceType">Medical Insurance Type</label>
+        <input id="caregiver.medicalInsuranceType" class="form-control" type="text" [(ngModel)]="caregiver.medicalInsuranceType" />
+      </div>
+      <div class="col">
+        <label for="caregiver.hasPrimaryDoctor">Do You Have Primary Doctor?</label>
+        <input id="caregiver.hasPrimaryDoctor" class="form-control" type="text" [(ngModel)]="caregiver.hasPrimaryDoctor" />
+      </div>
+      <div class="col-2">
+        <label for="caregiver.dentalInsurance">Dental Insurance?</label>
+        <input id="caregiver.dentalInsurance" class="form-control" type="text" [(ngModel)]="caregiver.dentalInsurance" />
+      </div>
     </div>
-    <div class="col">
 
+    <div class="row">
+      <div class="col-5">
+        <label for="caregiver.childCareType">Child Care Type</label>
+        <input id="caregiver.childCareType" class="form-control" type="text" [(ngModel)]="caregiver.childCareType" />
+      </div>
     </div>
-    <div class="col">
 
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <label for="caregiver.lastName">Caregiver Last Name *</label>
-      <input type="text" [(ngModel)]="caregiver.lastName" />
-    </div>
-    <div class="col">
-
-    </div>
-    <div class="col">
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <label for="caregiver.lastName">Caregiver Last Name *</label>
-      <input type="text" [(ngModel)]="caregiver.lastName" />
-    </div>
-    <div class="col">
-
-    </div>
-    <div class="col">
-
-    </div>
-  </div> -->
   </form>
 </div>
 
-<button type="button" class="btn btn-success" (click)="onSubmit()">SUBMIT</button>
+<div align="right">
+  <button type="button" class="btn btn-green" (click)="onSubmit()">SUBMIT</button>
+</div>

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-primaryhousehold',
   templateUrl: './primaryhousehold.component.html',
-  styleUrls: ['./primaryhousehold.component.scss']
+  styleUrls: ['./primaryhousehold.component.css']
 })
 export class PrimaryhouseholdComponent implements OnInit {
   public caregiver: Caregiver;
