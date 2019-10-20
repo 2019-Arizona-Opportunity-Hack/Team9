@@ -16,6 +16,7 @@ import { AddmemberComponent } from './addmember/addmember.component';
 import { MemberSearchResultComponent } from './member-search-result/member-search-result.component';
 import { ReportServiceSelectorComponent } from './report-service-selector/report-service-selector.component';
 import { ReportDatesSelectorComponent } from './report-dates-selector/report-dates-selector.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,9 +38,10 @@ import { ReportDatesSelectorComponent } from './report-dates-selector/report-dat
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
