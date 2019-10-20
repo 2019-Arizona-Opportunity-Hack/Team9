@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   public reportsClick() {
-    console.log("reports click");
+    this._router.navigate(['reportgenerator']);
   }
 
 }

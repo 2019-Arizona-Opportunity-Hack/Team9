@@ -71,3 +71,24 @@ img .imageFit {
   background-color: #00580E;
   color: #FFFFFF;
 }
+
+.services-list {
+  list-style-type: none;
+  padding: 0;
+  font-size: 22px;
+  text-align: center;
+}
+
+.services-list li {
+  padding: 0;
+  margin: 5px;
+  background-color: #F3F2F2;
+  line-height: 70px;
+  text-align: center;
+  border: gray 1px solid;
+}
+
+.active {
+  background-color: #00580E !important;
+  color: #FFFFFF;
+}

@@ -7,6 +7,8 @@ import { AddmemberQuestionComponent } from './addmember-question/addmember-quest
 import { MembersearchComponent } from './membersearch/membersearch.component';
 import { SuccessComponent } from './success/success.component';
 import { AddmembersComponent } from './addmembers/addmembers.component';
+import { ReportServiceSelectorComponent } from './report-service-selector/report-service-selector.component';
+import { ReportDatesSelectorComponent } from './report-dates-selector/report-dates-selector.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path: 'addmembers',
     component: AddmembersComponent
+  },
+  {
+    path: 'reportgenerator',
+    component: ReportServiceSelectorComponent
+  },
+  {
+    path: 'reportrun',
+    component: ReportDatesSelectorComponent
   }
 ];
 

@@ -14,6 +14,8 @@ import { SuccessComponent } from './success/success.component';
 import { MembersearchComponent } from './membersearch/membersearch.component';
 import { AddmemberComponent } from './addmember/addmember.component';
 import { MemberSearchResultComponent } from './member-search-result/member-search-result.component';
+import { ReportServiceSelectorComponent } from './report-service-selector/report-service-selector.component';
+import { ReportDatesSelectorComponent } from './report-dates-selector/report-dates-selector.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { MemberSearchResultComponent } from './member-search-result/member-searc
     SuccessComponent,
     MembersearchComponent,
     AddmemberComponent,
-    MemberSearchResultComponent
+    MemberSearchResultComponent,
+    ReportServiceSelectorComponent,
+    ReportDatesSelectorComponent
   ],
   imports: [
     BrowserModule,
