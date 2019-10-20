@@ -21,6 +21,19 @@
   <modules>
     <module>c3-server</module>
     <module>c3-server-api</module>
+    <module>c3-checkin</module>
+    <module>c3-employee-portal</module>
   </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.heroku.sdk</groupId>
+          <artifactId>heroku-maven-plugin</artifactId>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>
