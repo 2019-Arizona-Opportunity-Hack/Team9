@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light" style="border-bottom: black solid 1px">
+  <span><a href="/login"><img src="../../assets/logo.png" height="65" width="65" alt="Chandler Care Center"/></a></span>
+  <span class="steps">STEP 1 OF 4</span>
+</nav>
+<div class="container text-center">
+  <p class="large-text">Please enter your phone number.</p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <input class="form-control phoneNumber" formControlName="phoneNumber" value="{{getPhoneNumber}}">
+      <span class="input-group-btn">
+          <button class="btn btn-primary btn-green">SUBMIT</button>
+      </span>
+    </div>
+
+    <ol class="numbers-list list-inline">
+      <li class="list-inline-item col-md-3" *ngFor="let number of numbers" (click)="select(number)">
+        {{ number }}
+      </li>
+    </ol>
+  </form>
+
+</div>
