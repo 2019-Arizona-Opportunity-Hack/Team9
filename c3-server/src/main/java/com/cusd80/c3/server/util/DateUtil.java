@@ -21,6 +21,10 @@ public class DateUtil {
             date = LocalDate.parse(str, DateTimeFormatter.ofPattern("M/d/yyyy"));
         } catch (Exception ignore) {
         }
+        if (date == null) try {
+            date = LocalDate.parse(str, DateTimeFormatter.ofPattern("M/d/yy"));
+        } catch (Exception ignore) {
+        }
         return date;
     }
 

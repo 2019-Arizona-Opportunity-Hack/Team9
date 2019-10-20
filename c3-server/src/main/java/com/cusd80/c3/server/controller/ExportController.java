@@ -29,6 +29,9 @@ import com.cusd80.c3.server.repo.MemberRepository;
 import com.cusd80.c3.server.repo.ServiceRepository;
 import com.cusd80.c3.server.util.DateUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @Transactional
 @RequestMapping("export")
@@ -77,7 +80,10 @@ public class ExportController implements ExportApi {
         return ResponseEntity.ok().contentType(CSV).body(out -> {
             var s = DateUtil.parseDate(startDate).atStartOfDay(ZoneId.systemDefault()).toLocalDateTime();
             var e = DateUtil.parseDate(endDate).plusDays(1).atStartOfDay(ZoneId.systemDefault()).toLocalDateTime();
+            log.info("s: {}", s);
+            log.info("s: {}", s);
             var res = checkInRepository.findByServiceIdAndDateBetweenOrderByDate(serviceId, s, e);
+            log.info("res: {}", res.size());
             try (
                 var csv = new CSVPrinter(
                     new OutputStreamWriter(out, StandardCharsets.ISO_8859_1),
@@ -94,6 +100,7 @@ public class ExportController implements ExportApi {
                 )
             ) {
                 for (var checkIn : res) {
+                    log.info("checkIn: ", checkIn);
                     var rec = memberRepository.findById(checkIn.getMemberId()).orElse(null);
                     if (rec != null) {
                         csv.printRecord(
@@ -104,7 +111,7 @@ public class ExportController implements ExportApi {
                             checkIn.getDate(),
                             rec.getGender(),
                             rec.getEthnicity(),
-                            LocalDate.now().getYear() - rec.getBirthDate().getYear()
+                            rec.getBirthDate() != null ? LocalDate.now().getYear() - rec.getBirthDate().getYear() : null
                         );
                     }
                 }
