@@ -5,14 +5,26 @@
 <div id="mainForm">
   <div class="row">
     <div class="col">
-      <label for="lastName">Last Name *</label>
+      <label for="lastName">Last Name</label>
       <input type="text" [(ngModel)]="lastName" />
     </div>
     <div class="col">
-      <label for="dateOfBirth">Date of Birth (MM/DD/YYYY) *</label>
+      <label for="dateOfBirth">Date of Birth (MM/DD/YYYY)</label>
       <input type="text" [(ngModel)]="dateOfBirth" />
     </div>
     <div class="col align-items-center">
       <button class="btn btn-success" (click)="memberSearch()">Search</button>
+    </div>
+</div>
+
+<div *ngIf="results" class="inPageSubHeader">{{results.count}}</div>
+
+<div *ngFor="let result of results">
+  <div class="row">
+    <div class="col">
+      <label>Last Name</label>
+    </div>
+    <div class="col">
+      <label>Date of Birth (MM/DD/YYYY)</label>
     </div>
 </div>
