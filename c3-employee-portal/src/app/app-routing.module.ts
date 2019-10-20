@@ -9,6 +9,7 @@ import { SuccessComponent } from './success/success.component';
 import { AddmembersComponent } from './addmembers/addmembers.component';
 import { ReportServiceSelectorComponent } from './report-service-selector/report-service-selector.component';
 import { ReportDatesSelectorComponent } from './report-dates-selector/report-dates-selector.component';
+import {EditmemberComponent} from './editmember/editmember.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'reportrun',
     component: ReportDatesSelectorComponent
+  },
+  {
+    path: 'editmember',
+    component: EditmemberComponent
   }
 ];
 

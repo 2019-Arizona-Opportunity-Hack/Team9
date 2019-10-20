@@ -17,6 +17,7 @@ import { MemberSearchResultComponent } from './member-search-result/member-searc
 import { ReportServiceSelectorComponent } from './report-service-selector/report-service-selector.component';
 import { ReportDatesSelectorComponent } from './report-dates-selector/report-dates-selector.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EditmemberComponent } from './editmember/editmember.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddmemberComponent,
     MemberSearchResultComponent,
     ReportServiceSelectorComponent,
-    ReportDatesSelectorComponent
+    ReportDatesSelectorComponent,
+    EditmemberComponent
   ],
   imports: [
     BrowserModule,

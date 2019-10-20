@@ -10,13 +10,13 @@ import { Router } from '@angular/router';
 export class PrimaryhouseholdComponent implements OnInit {
   public caregiver: Caregiver;
 
-  constructor(private _router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.caregiver = new Caregiver();
   }
 
   public onSubmit() {
-    this._router.navigate(['addmemberquestion']);
+    this.router.navigate(['addmemberquestion']);
   }
 }
