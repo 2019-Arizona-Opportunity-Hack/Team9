@@ -11,7 +11,7 @@ import com.cusd80.c3.server.entity.Service;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
 @RestController
-@RequestMapping("v1/services")
+@RequestMapping("services")
 public class ServiceController {
 
     @Autowired
