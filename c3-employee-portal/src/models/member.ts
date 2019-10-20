@@ -1,7 +1,7 @@
 export class Member {
     firstName: string;
     lastName: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     gender: string;
     primaryLanguage: string;
     ethnicity: string;
