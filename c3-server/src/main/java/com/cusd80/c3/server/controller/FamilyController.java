@@ -1,18 +1,20 @@
 package com.cusd80.c3.server.controller;
 
-import com.cusd80.c3.api.FamilyApi;
-import com.cusd80.c3.api.model.Family;
-import com.cusd80.c3.server.entity.MemberEntity;
-import com.cusd80.c3.server.repo.MemberRepository;
-import com.cusd80.c3.server.util.FamilyMapper;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
+import com.cusd80.c3.api.FamilyApi;
+import com.cusd80.c3.api.model.Family;
+import com.cusd80.c3.server.entity.MemberEntity;
+import com.cusd80.c3.server.repo.MemberRepository;
+import com.cusd80.c3.server.util.FamilyMapper;
 
 @CrossOrigin
 @RestController
@@ -48,35 +50,27 @@ public class FamilyController implements FamilyApi {
         return persistRecord(family);
     }
 
-    private ResponseEntity<Void>  persistRecord(Family family)
-    {
-        //this try catch is rather lazy but it's a hackathon so...
-        try {
-            MemberEntity memberParent;
+    private ResponseEntity<Void> persistRecord(Family family) {
+        MemberEntity memberParent;
 
-            //get the parent and write it to the DB
-            memberParent = FamilyMapper.toParentEntity(family);
+        //get the parent and write it to the DB
+        memberParent = FamilyMapper.toParentEntity(family);
 
-            //todo: does this return new uuid?
-            memberParent = memberRepository.save(memberParent);
+        //todo: does this return new uuid?
+        memberParent = memberRepository.save(memberParent);
 
-            //set the parent id so the subsequent dependent calls hve the parent
-            family.getCaregiver().setCaregiverId(memberParent.getId());
+        //set the parent id so the subsequent dependent calls hve the parent
+        family.getCaregiver().setCaregiverId(memberParent.getId());
 
-            //map the child entities
-            List<MemberEntity> dependents = FamilyMapper.toDependentEntities(family);
+        //map the child entities
+        List<MemberEntity> dependents = FamilyMapper.toDependentEntities(family);
 
-            //write the children to the db
-            for (MemberEntity memberEntity : dependents) {
-                memberRepository.save(memberEntity);
-            }
-
-            return new ResponseEntity<>(HttpStatus.OK);
+        //write the children to the db
+        for (MemberEntity memberEntity : dependents) {
+            memberRepository.save(memberEntity);
         }
-        catch (Exception ex)
-        {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
