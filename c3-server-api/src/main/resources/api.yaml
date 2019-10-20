@@ -535,7 +535,6 @@ components:
         income_amount:
           type: integer
           format: int
-          $ref: '#/components/schemas/Self_Identification_Type'
         housing_type:
           type: string
           description: What type of housing is the member using?
