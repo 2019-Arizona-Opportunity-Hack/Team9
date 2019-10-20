@@ -111,7 +111,9 @@ public class ExportController implements ExportApi {
                             checkIn.getDate(),
                             rec.getGender(),
                             rec.getEthnicity(),
-                            rec.getBirthDate() != null ? LocalDate.now().getYear() - rec.getBirthDate().getYear() : null
+                            rec.getBirthDate() != null
+                                ? Math.abs(LocalDate.now().getYear() - rec.getBirthDate().getYear())
+                                : null
                         );
                     }
                 }
