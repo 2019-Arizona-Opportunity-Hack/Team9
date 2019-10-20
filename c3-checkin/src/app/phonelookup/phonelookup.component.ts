@@ -28,6 +28,10 @@ export class PhonelookupComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
+  backspace() {
+    this.phoneNumber = this.phoneNumber.substring(0, this.phoneNumber.length - 1);
+  }
+
   select(selNumber) {
     if (this.phoneNumber.length < 10) {
       this.phoneNumber = this.phoneNumber + '' + selNumber;
@@ -48,31 +52,32 @@ export class PhonelookupComponent implements OnInit {
 
       this.apiService.lookupByPhoneNumber(this.phoneNumber)
         .subscribe((data) => {
-          console.log(data);
-          sessionStorage.setItem('houseHoldName', data[0].caregiver.person.first_name + ' ' + data[0].caregiver.person.last_name);
-
-          members.push(
-            new Member(
-              data[0].caregiver.caregiver_id,
-              data[0].caregiver.person.first_name + ' ' + data[0].caregiver.person.last_name
-            )
-          );
-
-          let i;
           // @ts-ignore
-          for (i = 0; i < data[0].dependents.length; i++) {
+          if (data.length > 0) {
+            sessionStorage.setItem('houseHoldName', data[0].caregiver.person.first_name + ' ' + data[0].caregiver.person.last_name);
+
             members.push(
               new Member(
-                data[0].dependents[i].dependent_id,
-                data[0].dependents[i].person.first_name + ' ' + data[0].dependents[i].person.last_name
+                data[0].caregiver.caregiver_id,
+                data[0].caregiver.person.first_name + ' ' + data[0].caregiver.person.last_name
               )
             );
+
+            let i;
+            // @ts-ignore
+            for (i = 0; i < data[0].dependents.length; i++) {
+              members.push(
+                new Member(
+                  data[0].dependents[i].dependent_id,
+                  data[0].dependents[i].person.first_name + ' ' + data[0].dependents[i].person.last_name
+                )
+              );
+            }
+
+            sessionStorage.setItem('memberLookup', JSON.stringify(members, null, 4));
           }
-
-          sessionStorage.setItem('memberLookup', JSON.stringify(members, null, 4));
+          this.router.navigate(['verify']);
         });
-
-      this.router.navigate(['verify']);
     } else {
       alert('Please enter a valid phone number.');
     }

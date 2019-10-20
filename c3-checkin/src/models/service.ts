@@ -1,5 +1,5 @@
 export class Service {
   constructor(
-    public id: number,
+    public id: string,
     public name: string) { }
 }

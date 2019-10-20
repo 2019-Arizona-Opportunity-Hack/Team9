@@ -2,7 +2,7 @@ import {Service} from './service';
 
 export class ServicesByMember {
   constructor(
-    public id: number,
+    public id: string,
     public service: Service[]
   ) { }
 }

@@ -20,12 +20,17 @@ export class ApiService {
   };
 
   lookupByPhoneNumber(phoneNumber) {
+    phoneNumber = phoneNumber.slice(0, 3) + '-' + phoneNumber.slice(3, 6) + '-' + phoneNumber.slice(6);
     // return this.http.get(this.baseUrl + '/families?phone_number=' + phoneNumber, this.httpOptions);
-    return this.http.get('./assets/data/families.json', this.httpOptions);
+    return this.http.get('./assets/data/families.json?phone_number=' + phoneNumber, this.httpOptions);
   }
 
   getServices() {
     return this.http.get(this.baseUrl + '/services', this.httpOptions);
     // return this.http.get('./assets/data/services.json', this.httpOptions);
+  }
+
+  submitServicesByMember() {
+    return this.http.post(this.baseUrl + '/check-in', this.httpOptions);
   }
 }

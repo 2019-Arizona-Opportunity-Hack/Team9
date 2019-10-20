@@ -102,6 +102,20 @@ export class ServicesComponent implements OnInit {
         this.alreadyLoaded = false;
         this.ngOnInit();
       } else {
+        // [
+        //   {
+        //     "member_id": "3fb6798c-c1cd-47d8-a123-49812f204cba",
+        //     "service_id": "3fb6798c-c1cd-47d8-a123-49812f204cba",
+        //     "created_date": "20191020T013132"
+        //   }
+        // ]
+
+        // this.apiService.submitServicesByMember().subscribe((data) => {
+        //   console.log(data);
+        //
+        //   this.router.navigate(['thanks']);
+        // });
+
         this.router.navigate(['thanks']);
       }
     } else {
