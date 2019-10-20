@@ -2,22 +2,22 @@
   <div class="row">
     <div class="col">
       <label for="member.lastName">Member Last Name *</label>
-      <input id="member.lastName" class="form-control" type="text" [(ngModel)]="member.lastName" />
+      <input id="member.lastName" name="member.lastName" class="form-control" type="text" [(ngModel)]="member.lastName" />
     </div>
     <div class="col">
       <label for="member.firstName">Member First Name *</label>
-      <input id="member.firstName" class="form-control" type="text" [(ngModel)]="member.firstName" />
+      <input id="member.firstName" name="member.lastName" class="form-control" type="text" [(ngModel)]="member.firstName" />
     </div>
     <div class="col-2">
       <label for="member.dateOfBirth">Member DOB *</label>
-      <input id="member.dateOfBirth" class="form-control" type="text" [(ngModel)]="member.dateOfBirth" />
+      <input id="member.dateOfBirth" name="member.lastName" class="form-control" type="text" [(ngModel)]="member.dateOfBirth" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-2">
       <label for="member.gender">Gender</label>
-      <select id="member.gender" class="form-control" [(ngModel)]="member.gender">
+      <select id="member.gender" name="member.gender" class="form-control" [(ngModel)]="member.gender">
         <option></option>
         <option>1</option>
         <option>2</option>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-3">
       <label for="member.primaryLanguage">Primary Language</label>
-      <select id="member.primaryLanguage" class="form-control" [(ngModel)]="member.primaryLanguage">
+      <select id="member.primaryLanguage" name="member.primaryLanguage" class="form-control" [(ngModel)]="member.primaryLanguage">
         <option></option>
         <option>1</option>
         <option>2</option>
@@ -37,7 +37,7 @@
     </div>
     <div class="col">
       <label for="member.relationship">Relationship</label>
-      <select id="member.relationship" class="form-control" [(ngModel)]="member.relationship">
+      <select id="member.relationship" name="member.relationship" class="form-control" [(ngModel)]="member.relationship">
         <option></option>
         <option>1</option>
         <option>2</option>
@@ -47,7 +47,7 @@
     </div>
     <div class="col-2">
       <label for="member.specialNeeds">Special Needs?</label>
-      <select id="member.specialNeeds" class="form-control" [(ngModel)]="member.specialNeeds">
+      <select id="member.specialNeeds" name="member.specialNeeds" class="form-control" [(ngModel)]="member.specialNeeds">
         <option></option>
         <option>1</option>
         <option>2</option>
@@ -60,7 +60,7 @@
   <div class="row">
     <div class="col">
       <label for="member.ethnicity">Member Ethnicity</label>
-      <select id="member.ethnicity" class="form-control" [(ngModel)]="member.ethnicity">
+      <select id="member.ethnicity" name="member.ethnicity" class="form-control" [(ngModel)]="member.ethnicity">
         <option></option>
         <option>1</option>
         <option>2</option>
@@ -70,7 +70,7 @@
     </div>
     <div class="col">
       <label for="member.selfIdentifiesAs">Self-Identifies As</label>
-      <select id="member.selfIdentifiesAs" class="form-control" [(ngModel)]="member.selfIdentifiesAs">
+      <select id="member.selfIdentifiesAs" name="member.selfIdentifiesAs" class="form-control" [(ngModel)]="member.selfIdentifiesAs">
         <option></option>
         <option>1</option>
         <option>2</option>
@@ -80,7 +80,7 @@
     </div>
     <div class="col-2">
       <label for="member.school">School</label>
-      <input id="member.school" class="form-control" type="text" [(ngModel)]="member.school" />
+      <input id="member.school" name="member.school" class="form-control" type="text" [(ngModel)]="member.school" />
     </div>
 
   </div>
@@ -88,7 +88,7 @@
   <div class="row">
     <div class="col">
       <label for="member.medicalInsuranceType">Medical Insurance Type</label>
-      <select id="member.medicalInsuranceType" class="form-control" [(ngModel)]="member.medicalInsuranceType">
+      <select id="member.medicalInsuranceType" name="member.medicalInsuranceType" class="form-control" [(ngModel)]="member.medicalInsuranceType">
         <option></option>
         <option>1</option>
         <option>2</option>
@@ -100,12 +100,12 @@
       <label>Do You Have Primary Doctor?</label>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="member.hasPrimaryDoctor"> Yes
+          <input type="radio" name="caregiver.hasPrimaryDoctor" value="yes" class="form-check-input" [(ngModel)]="member.hasPrimaryDoctor"> Yes
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="member.hasPrimaryDoctor"> No
+          <input type="radio" name="caregiver.hasPrimaryDoctor" value="no" class="form-check-input" [(ngModel)]="member.hasPrimaryDoctor"> No
         </label>
       </div>
     </div>
@@ -113,12 +113,12 @@
       <label>Dental Insurance?</label>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="member.dentalInsurance"> Yes
+          <input type="radio" name="caregiver.dentalInsurance" value="yes" class="form-check-input"  [(ngModel)]="member.dentalInsurance"> Yes
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="member.dentalInsurance"> No
+          <input type="radio" name="caregiver.dentalInsurance" value="no" class="form-check-input"  [(ngModel)]="member.dentalInsurance"> No
         </label>
       </div>
     </div>
