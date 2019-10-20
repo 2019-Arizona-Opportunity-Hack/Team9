@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from 'src/models/Member';
+import { Member } from 'src/models/member';
 
 @Component({
   selector: 'app-member-search-result',

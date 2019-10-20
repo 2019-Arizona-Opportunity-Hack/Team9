@@ -53,6 +53,7 @@ img .imageFit {
 
 #mainForm label {
   display: block;
+  margin-bottom: 5px;
 }
 
 #mainForm .row {
