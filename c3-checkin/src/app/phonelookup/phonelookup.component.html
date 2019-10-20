@@ -7,9 +7,9 @@
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="input-group">
-      <input class="form-control phoneNumber" formControlName="phoneNumber" value="{{getPhoneNumber}}">
+      <input class="form-control phoneNumber" type="number" formControlName="phoneNumber" value="{{getPhoneNumber}}">
       <span class="input-group-btn">
-          <button class="btn btn-primary btn-green">SUBMIT</button>
+          <button class="btn btn-green">SUBMIT</button>
       </span>
     </div>
 

@@ -33,8 +33,12 @@ export class WhoneedsComponent implements OnInit {
   }
 
   onClick() {
-    sessionStorage.setItem('whoNeeds', JSON.stringify(this.selected, null, 4));
+    if (this.selected.length > 0) {
+      sessionStorage.setItem('whoNeeds', JSON.stringify(this.selected, null, 4));
 
-    window.location.href = '/services';
+      window.location.href = '/services';
+    } else {
+      alert('Please select who needs services.');
+    }
   }
 }

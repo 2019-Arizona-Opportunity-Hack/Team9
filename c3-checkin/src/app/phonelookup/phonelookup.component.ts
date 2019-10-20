@@ -37,10 +37,14 @@ export class PhonelookupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    if (this.phoneNumber.length === 10) {
+      this.submitted = true;
 
-    sessionStorage.setItem('houseHoldName', 'Jesse Coddington');
+      sessionStorage.setItem('houseHoldName', 'Jesse Coddington');
 
-    window.location.href = '/verify';
+      window.location.href = '/verify';
+    } else {
+      alert('Please enter a valid phone number.');
+    }
   }
 }

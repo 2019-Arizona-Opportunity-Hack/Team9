@@ -67,35 +67,39 @@ export class ServicesComponent implements OnInit {
   }
 
   onClick() {
-    let services = [];
-    const servicesByMember = [];
-    const existingServicesByMember = JSON.parse(sessionStorage.getItem('servicesByMember'));
+    if (this.selected.length > 0) {
+      let services = [];
+      const servicesByMember = [];
+      const existingServicesByMember = JSON.parse(sessionStorage.getItem('servicesByMember'));
 
-    if (existingServicesByMember !== null) {
-      let i;
-      for (i = 0; i < existingServicesByMember.length; i++) {
-        services = [];
-        let j;
-        for (j = 0; j < existingServicesByMember[i].service.length; j++) {
-          services.push(new Service(existingServicesByMember[i].service[j].id, existingServicesByMember[i].service[j].name));
+      if (existingServicesByMember !== null) {
+        let i;
+        for (i = 0; i < existingServicesByMember.length; i++) {
+          services = [];
+          let j;
+          for (j = 0; j < existingServicesByMember[i].service.length; j++) {
+            services.push(new Service(existingServicesByMember[i].service[j].id, existingServicesByMember[i].service[j].name));
+          }
+          servicesByMember.push(new ServicesByMember(existingServicesByMember[i].id, services));
         }
-        servicesByMember.push(new ServicesByMember(existingServicesByMember[i].id, services));
       }
-    }
 
-    services = [];
-    let k;
-    for (k = 0; k < this.selected.length; k++) {
-      services.push(new Service(this.selected[k].id, this.selected[k].name));
-    }
-    servicesByMember.push(new ServicesByMember(this.selectedMember.id, services));
+      services = [];
+      let k;
+      for (k = 0; k < this.selected.length; k++) {
+        services.push(new Service(this.selected[k].id, this.selected[k].name));
+      }
+      servicesByMember.push(new ServicesByMember(this.selectedMember.id, services));
 
-    sessionStorage.setItem('servicesByMember', JSON.stringify(servicesByMember, null, 4));
+      sessionStorage.setItem('servicesByMember', JSON.stringify(servicesByMember, null, 4));
 
-    if (this.whoNeeds.length > 0) {
-      window.location.href = '/services';
+      if (this.whoNeeds.length > 0) {
+        window.location.href = '/services';
+      } else {
+        window.location.href = '/thanks';
+      }
     } else {
-      window.location.href = '/thanks';
+      alert('Please select the services needed.');
     }
   }
 }
