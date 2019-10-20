@@ -21,9 +21,10 @@
   <dependencies>
     <dependency>
       <groupId>com.cusd80.c3</groupId>
-      <artifactId>c3-server-spec</artifactId>
+      <artifactId>c3-server-api</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <optional>true</optional>

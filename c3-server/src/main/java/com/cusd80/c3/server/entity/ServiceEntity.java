@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Table(name = "service")
 @Entity(name = "Service")
-public class Service implements UUIDEntity {
+public class ServiceEntity implements UUIDEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")

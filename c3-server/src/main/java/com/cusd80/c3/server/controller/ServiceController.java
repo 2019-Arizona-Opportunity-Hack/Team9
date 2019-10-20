@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cusd80.c3.server.entity.Service;
+import com.cusd80.c3.server.entity.ServiceEntity;
 import com.cusd80.c3.server.repo.ServiceRepository;
 
 @RestController
@@ -18,17 +18,17 @@ public class ServiceController {
     private ServiceRepository serviceRepRegistry;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Service> list() {
+    public Iterable<ServiceEntity> list() {
         return serviceRepRegistry.findAll();
     }
 
     @RequestMapping(path = "{id}", method = RequestMethod.GET)
-    public Service get(@PathVariable("id") String id) {
+    public ServiceEntity get(@PathVariable("id") String id) {
         return serviceRepRegistry.findById(id).orElse(null);
     }
 
     @RequestMapping(path = "{id}", method = RequestMethod.PUT)
-    public Service put(@PathVariable(name = "id", required = false) String id, @RequestBody Service service) {
+    public ServiceEntity put(@PathVariable(name = "id", required = false) String id, @RequestBody ServiceEntity service) {
         if (id != null && !id.isBlank()) {
             service.setId(id);
         }

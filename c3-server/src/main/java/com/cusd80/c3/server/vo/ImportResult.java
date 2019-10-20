@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ImportResult {
 
-    private long recordsImported;
+    private long recordsImported = 0;
+
+    public void addRecordsImported(int add) {
+        recordsImported += add;
+    }
 
 }
