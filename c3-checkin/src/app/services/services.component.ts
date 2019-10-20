@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Service} from '../../models/service';
 import {Member} from '../../models/member';
 import {ServicesByMember} from '../../models/servicesByMember';
+import {FormBuilder} from '@angular/forms';
+import {ApiService} from '../api.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-services',
@@ -12,25 +15,18 @@ export class ServicesComponent implements OnInit {
   selectedMember: Member;
   whoNeeds = [];
   selected = [];
+  services = [];
 
-  services = [
-    new Service(1, 'AHCCCS'),
-    new Service(2, 'CLASSES'),
-    new Service(3, 'DENTAL'),
-    new Service(4, 'DIAPERS'),
-    new Service(5, 'DENTAL SCREENING'),
-    new Service(6, 'FOOD BANK'),
-    new Service(7, 'IMMUNIZATIONS'),
-    new Service(8, 'MEDICAL'),
-    new Service(9, 'VISION & HEARING'),
-    new Service(10, 'WIC'),
-    new Service(11, 'THANKSGIVING'),
-    new Service(12, 'TOY DISTRIBUTION'),
-    new Service(13, 'THKG CHECK-IN'),
-    new Service(14, 'XMAS CHECK-IN')
-  ];
+  constructor(private apiService: ApiService, private router: Router) {
+    this.apiService.getServices()
+      .subscribe((data) => {
+        let i;
+        // @ts-ignore
+        for (i = 0; i < data.length; i++) {
+          this.services.push(new Service(data[i].service_id, data[i].name));
+        }
+      });
 
-  constructor() {
     this.whoNeeds = JSON.parse(sessionStorage.getItem('whoNeeds'));
     this.selectedMember = this.whoNeeds.pop();
     sessionStorage.setItem('whoNeeds', JSON.stringify(this.whoNeeds, null, 4));
@@ -94,9 +90,9 @@ export class ServicesComponent implements OnInit {
       sessionStorage.setItem('servicesByMember', JSON.stringify(servicesByMember, null, 4));
 
       if (this.whoNeeds.length > 0) {
-        window.location.href = 'services';
+        this.router.navigate(['services']);
       } else {
-        window.location.href = 'thanks';
+        this.router.navigate(['thanks']);
       }
     } else {
       alert('Please select the services needed.');

@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-thanks',
@@ -7,7 +8,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 })
 export class ThanksComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     sessionStorage.clear();
@@ -18,6 +19,6 @@ export class ThanksComponent implements OnInit, AfterViewInit {
   }
 
   myTimer() {
-    window.location.href = 'login';
+    this.router.navigate(['login']);
   }
 }

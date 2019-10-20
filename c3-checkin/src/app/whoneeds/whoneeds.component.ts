@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Member} from '../../models/member';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-whoneeds',
@@ -16,7 +17,7 @@ export class WhoneedsComponent implements OnInit {
     new Member(5, 'Ty G.')
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
 
@@ -36,7 +37,7 @@ export class WhoneedsComponent implements OnInit {
     if (this.selected.length > 0) {
       sessionStorage.setItem('whoNeeds', JSON.stringify(this.selected, null, 4));
 
-      window.location.href = 'services';
+      this.router.navigate(['services']);
     } else {
       alert('Please select who needs services.');
     }

@@ -25,7 +25,7 @@
 }
 
 .btn-checkmark {
-  background-image: url("/assets/checkmark.png");
+  background-image: url("/src/assets/images/checkmark.png");
   background-repeat: no-repeat;
   background-size: 39px 43px;
   padding-left: 41px;
