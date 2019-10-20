@@ -628,6 +628,13 @@ components:
             - Evacuee
             - Own_Home
             - Other
+            - Private_Rental
+            - With_Family_Friends
+            - Public_Housing
+            - Youth_Home_Shelter
+            - Undisclosed
+            - Refugee
+            - Unhoused
         education_level:
           type: string
           description: What is the members level of education?

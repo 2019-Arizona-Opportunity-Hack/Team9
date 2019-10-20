@@ -3,9 +3,7 @@ package com.cusd80.c3.server.controller;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -36,6 +34,7 @@ import com.cusd80.c3.server.enums.MemberType;
 import com.cusd80.c3.server.repo.CheckInRepository;
 import com.cusd80.c3.server.repo.MemberRepository;
 import com.cusd80.c3.server.repo.ServiceRepository;
+import com.cusd80.c3.server.util.DateUtil;
 import com.cusd80.c3.server.vo.ImportResult;
 
 @RestController
@@ -114,7 +113,7 @@ public class ImportController implements ImportApi {
                 member.setType(MemberType.fromString(rec.get("type")));
                 member.setFirstName(rec.get("firstName"));
                 member.setLastName(rec.get("lastName"));
-                member.setBirthDate(parseDate(rec.get("birthDate")));
+                member.setBirthDate(DateUtil.parseDate(rec.get("birthDate")));
                 member.setAddress1(rec.get("address1"));
                 member.setAddress2(rec.get("address2"));
                 member.setCity(rec.get("city"));
@@ -141,7 +140,7 @@ public class ImportController implements ImportApi {
                 member.setChildCareType(rec.get("childCareType"));
                 member.setSpecialNeeds(rec.get("specialNeeds"));
                 member.setSchool(rec.get("school"));
-                member.setUpdateDate(parseDateTime(rec.get("updateDate")));
+                member.setUpdateDate(DateUtil.parseDateTime(rec.get("updateDate")));
 
                 memberRepository.save(member);
                 result.addRecordsImported(1);
@@ -181,30 +180,5 @@ public class ImportController implements ImportApi {
         }
     }
 
-    private LocalDate parseDate(String str) {
-        LocalDate date = null;
-        if (date == null) try {
-            date = LocalDate.parse(str);
-        } catch (Exception ignore) {
-        }
-        if (date == null) try {
-            date = LocalDate.parse(str, DateTimeFormatter.ofPattern("M/d/yyyy"));
-        } catch (Exception ignore) {
-        }
-        return date;
-    }
-
-    private LocalDateTime parseDateTime(String str) {
-        LocalDateTime dateTime = null;
-        if (dateTime == null) try {
-            dateTime = LocalDateTime.parse(str);
-        } catch (Exception ignore) {
-        }
-        if (dateTime == null) try {
-            dateTime = ZonedDateTime.parse(str).toLocalDateTime();
-        } catch (Exception ignore) {
-        }
-        return dateTime;
-    }
 
 }

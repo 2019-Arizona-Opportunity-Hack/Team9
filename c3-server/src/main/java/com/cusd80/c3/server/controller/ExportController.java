@@ -63,14 +63,28 @@ public class ExportController implements ExportApi {
         });
     }
 
-    @RequestMapping(path = "services.csv", method = RequestMethod.GET, produces = CSV_VALUE)
-    public ResponseEntity<StreamingResponseBody> exportReportCsvGet(@Valid String serviceId, @Valid String startDate, @Valid String endDate) {
+    @RequestMapping(path = "report.csv", method = RequestMethod.GET, produces = CSV_VALUE)
+    public ResponseEntity<StreamingResponseBody> exportReport(
+        @Valid String serviceId,
+        @Valid String startDate,
+        @Valid String endDate
+    )
+    {
         return ResponseEntity.ok().contentType(CSV).body(out -> {
             try (
-                    var csv = new CSVPrinter(
-                            new OutputStreamWriter(out, StandardCharsets.ISO_8859_1),
-                            CSVFormat.EXCEL.withHeader("first_name","last_name","service_id","service_name","check_in_date","gender","ethnicity","age")
+                var csv = new CSVPrinter(
+                    new OutputStreamWriter(out, StandardCharsets.ISO_8859_1),
+                    CSVFormat.EXCEL.withHeader(
+                        "first_name",
+                        "last_name",
+                        "service_id",
+                        "service_name",
+                        "check_in_date",
+                        "gender",
+                        "ethnicity",
+                        "age"
                     )
+                )
             ) {
                 for (var rec : serviceRepository.findAll()) {
                     csv.printRecord(rec.getId(), rec.getName(), rec.getSortOrder(), rec.isEnabled());

@@ -1,12 +1,5 @@
 package com.cusd80.c3.server.util;
 
-import com.cusd80.c3.api.model.*;
-import com.cusd80.c3.server.entity.MemberEntity;
-import com.cusd80.c3.server.enums.MemberType;
-import com.cusd80.c3.server.repo.MemberRepository;
-import com.google.common.base.Enums;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,18 +8,27 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import com.cusd80.c3.api.model.Address;
+import com.cusd80.c3.api.model.Caregiver;
+import com.cusd80.c3.api.model.Dependent;
+import com.cusd80.c3.api.model.Family;
+import com.cusd80.c3.api.model.IncomeType;
+import com.cusd80.c3.api.model.Person;
+import com.cusd80.c3.api.model.SelfIdentificationType;
+import com.cusd80.c3.server.entity.MemberEntity;
+import com.cusd80.c3.server.enums.MemberType;
+import com.google.common.base.Enums;
+
 public class FamilyMapper {
 
-    public static MemberEntity toParentEntity(Family family)
-    {
+    public static MemberEntity toParentEntity(Family family) {
 
         //this code is horrid but it works so...
 
         MemberEntity member = new MemberEntity();
         member.setId(family.getCaregiver().getCaregiverId());
 
-        if (family.getCaregiver().getAddress() != null)
-        {
+        if (family.getCaregiver().getAddress() != null) {
             member.setAddress1(family.getCaregiver().getAddress().getAddressLine1());
             member.setAddress2(family.getCaregiver().getAddress().getAddressLine2());
             member.setCity(family.getCaregiver().getAddress().getCity());
@@ -40,22 +42,40 @@ public class FamilyMapper {
         member.setEthnicity(MappingHelper.enumValue(family.getCaregiver().getPerson().getEthnicityType()));
         member.setFirstName(family.getCaregiver().getPerson().getFirstName());
         member.setLastName(family.getCaregiver().getPerson().getLastName());
-        member.setGender(MappingHelper.enumValue(family.getCaregiver().getPerson().getGender()));
+        try {
+            member.setGender(MappingHelper.enumValue(family.getCaregiver().getPerson().getGender()));
+        } catch (Exception ignore) {
+        }
         member.setHasDentalInsurance(family.getCaregiver().getPerson().getHasDentalInsurance());
         member.setHasPrimaryCareProvider(family.getCaregiver().getPerson().getHasPrimaryCareProvider());
-        member.setHousingType(MappingHelper.enumValue(family.getCaregiver().getHousingType()));
+        try {
+            member.setHousingType(MappingHelper.enumValue(family.getCaregiver().getHousingType()));
+        } catch (Exception ignore) {
+        }
         member.setIncomeAmount(family.getCaregiver().getIncomeAmount());
-        member.setInsuranceType(MappingHelper.enumValue(family.getCaregiver().getInsuranceType()));
-        member.setEmploymentType(MappingHelper.enumValue(family.getCaregiver().getEmploymentType()));
-        member.setMaritalStatus(MappingHelper.enumValue(family.getCaregiver().getMaritalStatus()));
-        member.setSelfIdentify(MappingHelper.enumValue(family.getCaregiver().getPerson().getSelfIdentifiesAs()));
+        try {
+            member.setInsuranceType(MappingHelper.enumValue(family.getCaregiver().getInsuranceType()));
+        } catch (Exception ignore) {
+        }
+        try {
+            member.setEmploymentType(MappingHelper.enumValue(family.getCaregiver().getEmploymentType()));
+        } catch (Exception ignore) {
+        }
+        try {
+            member.setMaritalStatus(MappingHelper.enumValue(family.getCaregiver().getMaritalStatus()));
+        } catch (Exception ignore) {
+        }
+        try {
+            member.setSelfIdentify(MappingHelper.enumValue(family.getCaregiver().getPerson().getSelfIdentifiesAs()));
+        } catch (Exception ignore) {
+        }
         member.setPhoneNumber(family.getCaregiver().getAddress().getPhone());
         member.setType(MemberType.PRIMARY);
         member.setUpdateDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 
         //inefficient but works...having some trouble getting the conversion right so went with a loop
         HashSet<String> set = new HashSet<String>();
-        for (IncomeType incomeType: family.getCaregiver().getIncomeTypes()) {
+        for (IncomeType incomeType : family.getCaregiver().getIncomeTypes()) {
             set.add(incomeType.toString());
         }
 
@@ -64,8 +84,7 @@ public class FamilyMapper {
         //this is crap code but i dont care.
         if (family.getCaregiver().getPerson().getDateOfBirth() == null) {
             throw new IllegalArgumentException("DOB was null. This value must be provided.");
-        }
-        else {
+        } else {
             DateTimeFormatter dTF = DateTimeFormatter.ofPattern("yyyyMMdd");
             member.setBirthDate(LocalDate.parse(family.getCaregiver().getPerson().getDateOfBirth(), dTF));
         }
@@ -73,14 +92,12 @@ public class FamilyMapper {
         return member;
     }
 
-    public static List<MemberEntity> toDependentEntities(Family family)
-    {
+    public static List<MemberEntity> toDependentEntities(Family family) {
         MemberEntity member = new MemberEntity();
         List<Dependent> dependents = family.getDependents();
         List<MemberEntity> members = new ArrayList<MemberEntity>();
 
-        for (Dependent dependent : dependents)
-        {
+        for (Dependent dependent : dependents) {
             member = new MemberEntity();
             member.setId(dependent.getDependentId());
             member.setType(MemberType.DEPENDENT);
@@ -110,27 +127,26 @@ public class FamilyMapper {
         return members;
     }
 
-//    public static List<Family> fromCaregiverMembers(List<MemberEntity> entities)
-//    {
-//        List<Family> families = new ArrayList<>();
-//
-//        for(MemberEntity entity : entities)
-//        {
-//            families.add(fromCaregiverMember(entity));
-//
-//            //get the children in a nested loop. not pretty but ok for MVP
-//            //find the dependents
-//            List<MemberEntity> dependents = memberRepository.findByParentId(daFamily.getCaregiver().getCaregiverId());
-//
-//            //map the dependents to the appropriate data type
-//            daFamily.setDependents(FamilyMapper.fromDependentMember(dependents));
-//        }
-//
-//        return families;
-//    }
+    //    public static List<Family> fromCaregiverMembers(List<MemberEntity> entities)
+    //    {
+    //        List<Family> families = new ArrayList<>();
+    //
+    //        for(MemberEntity entity : entities)
+    //        {
+    //            families.add(fromCaregiverMember(entity));
+    //
+    //            //get the children in a nested loop. not pretty but ok for MVP
+    //            //find the dependents
+    //            List<MemberEntity> dependents = memberRepository.findByParentId(daFamily.getCaregiver().getCaregiverId());
+    //
+    //            //map the dependents to the appropriate data type
+    //            daFamily.setDependents(FamilyMapper.fromDependentMember(dependents));
+    //        }
+    //
+    //        return families;
+    //    }
 
-    public static Family fromCaregiverMember(MemberEntity entity)
-    {
+    public static Family fromCaregiverMember(MemberEntity entity) {
         Family family = new Family();
         Caregiver giver = new Caregiver();
         Address address = new Address();
@@ -146,19 +162,25 @@ public class FamilyMapper {
 
         //this is crap but i'm tired
         try {
-            giver.setChildCareType(Enums.getIfPresent(Caregiver.ChildCareTypeEnum.class, entity.getChildCareType()).orNull());
+            giver.setChildCareType(
+                Enums.getIfPresent(Caregiver.ChildCareTypeEnum.class, entity.getChildCareType()).orNull()
+            );
         } catch (Exception ex) {
 
         }
 
         try {
-            giver.setEducationLevel(Enums.getIfPresent(Caregiver.EducationLevelEnum.class, entity.getEducationLevel()).orNull());
+            giver.setEducationLevel(
+                Enums.getIfPresent(Caregiver.EducationLevelEnum.class, entity.getEducationLevel()).orNull()
+            );
         } catch (Exception ex) {
 
         }
 
         try {
-            giver.setEmploymentType(Enums.getIfPresent(Caregiver.EmploymentTypeEnum.class, entity.getEmploymentType()).orNull());
+            giver.setEmploymentType(
+                Enums.getIfPresent(Caregiver.EmploymentTypeEnum.class, entity.getEmploymentType()).orNull()
+            );
         } catch (Exception ex) {
 
         }
@@ -170,13 +192,17 @@ public class FamilyMapper {
         }
 
         try {
-            giver.setInsuranceType(Enums.getIfPresent(Caregiver.InsuranceTypeEnum.class, entity.getInsuranceType()).orNull());
+            giver.setInsuranceType(
+                Enums.getIfPresent(Caregiver.InsuranceTypeEnum.class, entity.getInsuranceType()).orNull()
+            );
         } catch (Exception ex) {
 
         }
 
         try {
-            giver.setMaritalStatus(Enums.getIfPresent(Caregiver.MaritalStatusEnum.class, entity.getMaritalStatus()).orNull());
+            giver.setMaritalStatus(
+                Enums.getIfPresent(Caregiver.MaritalStatusEnum.class, entity.getMaritalStatus()).orNull()
+            );
         } catch (Exception ex) {
 
         }
@@ -186,8 +212,11 @@ public class FamilyMapper {
         //lazy way
         List<IncomeType> incomeTypes = new ArrayList<>();
 
-        for (String incomeType: entity.getIncomeTypes()) {
-            incomeTypes.add(IncomeType.fromValue(incomeType));
+        for (String incomeType : entity.getIncomeTypes()) {
+            try {
+                incomeTypes.add(IncomeType.fromValue(incomeType));
+            } catch (Exception ignore) {
+            }
         }
 
         giver.setIncomeTypes(incomeTypes);
@@ -198,17 +227,29 @@ public class FamilyMapper {
         person.setHasPrimaryCareProvider(entity.getHasPrimaryCareProvider());
         person.setHasDentalInsurance(entity.getHasDentalInsurance());
         person.setDateOfBirth(MappingHelper.enumValue(entity.getBirthDate()));
-        person.setGender(Person.GenderEnum.fromValue(entity.getGender()));
+        try {
+            person.setGender(Person.GenderEnum.fromValue(entity.getGender()));
+        } catch (Exception ignore) {
+        }
         person.setHasSpecialNeeds(Boolean.parseBoolean(entity.getSpecialNeeds()));
-        person.setMedicalInsurer(entity.getInsuranceType());
-        person.setPrimaryLanguage(entity.getLanguage());
-        person.setEthnicityType(Enums.getIfPresent(Person.EthnicityTypeEnum.class, entity.getEthnicity()).orNull());
+        try {
+            person.setMedicalInsurer(entity.getInsuranceType());
+        } catch (Exception ignore) {
+        }
+        try {
+            person.setPrimaryLanguage(entity.getLanguage());
+        } catch (Exception ignore) {
+        }
+        try {
+            person.setEthnicityType(Enums.getIfPresent(Person.EthnicityTypeEnum.class, entity.getEthnicity()).orNull());
+        } catch (Exception ignore) {
+        }
 
         try {
-            person.setSelfIdentifiesAs(Enums.getIfPresent(SelfIdentificationType.class, entity.getSelfIdentify()).orNull());
-        }
-        catch (Exception ex)
-        {
+            person.setSelfIdentifiesAs(
+                Enums.getIfPresent(SelfIdentificationType.class, entity.getSelfIdentify()).orNull()
+            );
+        } catch (Exception ex) {
             //have no idea why this is faililng and i am too tired to care
         }
 
@@ -218,12 +259,10 @@ public class FamilyMapper {
         return family;
     }
 
-    public static List<Dependent> fromDependentMember(List<MemberEntity> entities)
-    {
+    public static List<Dependent> fromDependentMember(List<MemberEntity> entities) {
         List<Dependent> dependents = new ArrayList<>();
 
-        for(MemberEntity entity : entities )
-        {
+        for (MemberEntity entity : entities) {
             Dependent dependent = new Dependent();
             dependent.setDependentId(entity.getId());
             Address address = new Address();
@@ -238,9 +277,12 @@ public class FamilyMapper {
             dependent.setSchool(entity.getSchool());
 
             try {
-                dependent.setRelationshipToCaregiver(Enums.getIfPresent(Dependent.RelationshipToCaregiverEnum.class, entity.getRelationshipToCaregiver()).orNull());
+                dependent.setRelationshipToCaregiver(
+                    Enums.getIfPresent(Dependent.RelationshipToCaregiverEnum.class, entity.getRelationshipToCaregiver())
+                        .orNull()
+                );
+            } catch (Exception ex) {
             }
-            catch (Exception ex) {}
 
             Person person = new Person();
             person.setFirstName(entity.getFirstName());
@@ -248,17 +290,13 @@ public class FamilyMapper {
             person.setHasPrimaryCareProvider(entity.getHasPrimaryCareProvider());
             person.setHasDentalInsurance(entity.getHasDentalInsurance());
 
-            if (entity.getBirthDate() != null)
-            {
+            if (entity.getBirthDate() != null) {
                 person.setDateOfBirth(entity.getBirthDate().toString());
             }
 
-
             try {
                 person.setGender(Person.GenderEnum.fromValue(entity.getGender()));
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
 
             }
 
@@ -267,16 +305,18 @@ public class FamilyMapper {
             person.setPrimaryLanguage(entity.getLanguage());
 
             try {
-            person.setSelfIdentifiesAs(Enums.getIfPresent(SelfIdentificationType.class, entity.getSelfIdentify()).orNull());
-        }
-            catch (Exception ex)
-            {}
+                person.setSelfIdentifiesAs(
+                    Enums.getIfPresent(SelfIdentificationType.class, entity.getSelfIdentify()).orNull()
+                );
+            } catch (Exception ex) {
+            }
 
             try {
-            person.setEthnicityType(Enums.getIfPresent(Person.EthnicityTypeEnum.class, entity.getEthnicity()).orNull());
-    }
-            catch (Exception ex)
-            {}
+                person.setEthnicityType(
+                    Enums.getIfPresent(Person.EthnicityTypeEnum.class, entity.getEthnicity()).orNull()
+                );
+            } catch (Exception ex) {
+            }
             dependent.setPerson(person);
 
             dependents.add(dependent);
@@ -284,7 +324,5 @@ public class FamilyMapper {
 
         return dependents;
     }
-
-
 
 }
