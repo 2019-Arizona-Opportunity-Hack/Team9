@@ -3,41 +3,55 @@
 <div class="inPageHeader">New Member Registration</div>
 
 <div id="mainForm">
-  <div class="row">
-    <div class="col">
-      <label for="caregiver.lastName">Caregiver Last Name *</label>
-      <input type="text" [(ngModel)]="caregiver.lastName" />
+  <form>
+    <div class="row">
+      <div class="col">
+        <label for="caregiver.lastName">Caregiver Last Name *</label>
+        <input id="caregiver.lastName" class="form-control" type="text" [(ngModel)]="caregiver.lastName" />
+      </div>
+      <div class="col">
+        <label for="caregiver.firstName">Caregiver First Name *</label>
+        <input id="caregiver.firstName" class="form-control" type="text" [(ngModel)]="caregiver.firstName" />
+      </div>
+      <div class="col-2">
+        <label for="caregiver.dateOfBirth">Caregiver DOB *</label>
+        <input id="caregiver.dateOfBirth" class="form-control" type="text" [(ngModel)]="caregiver.dateOfBirth" />
+      </div>
     </div>
-    <div class="col">
-      <label for="caregiver.firstName">Caregiver First Name *</label>
-      <input type="text" [(ngModel)]="caregiver.firstName" />
-    </div>
-    <div class="col">
-      <label for="caregiver.dateOfBirth">Caregiver DOB *</label>
-      <input type="text" [(ngModel)]="caregiver.dateOfBirth" />
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <label for="caregiver.address">Caregiver Address *</label>
-      <input type="text" [(ngModel)]="caregiver.address" />
-    </div>
-    <div class="col">
-      <div style="float: left; margin-right: 15px;">
+    <div class="row">
+      <div class="col">
+        <label for="caregiver.address">Caregiver Address *</label>
+        <input id="caregiver.address" class="form-control" type="text" [(ngModel)]="caregiver.address" />
+      </div>
+      <div class="col">
         <label for="caregiver.city">City *</label>
-        <input style="width: 134px;"type="text" [(ngModel)]="caregiver.city" />
-      </div>
-      <div style="float: left;">
+        <input id="caregiver.city" class="form-control" type="text" [(ngModel)]="caregiver.city" />
         <label for="caregiver.state">State *</label>
-        <input style="width: 50px;" type="text" [(ngModel)]="caregiver.state" />
+        <input id="caregiver.state" class="form-control" type="text" [(ngModel)]="caregiver.state" />
+      </div>
+      <div class="col-2">
+        <label for="caregiver.zipCode">Zip Code *</label>
+        <input id="caregiver.zipCode" class="form-control" type="text" [(ngModel)]="caregiver.zipCode" />
       </div>
     </div>
-    <div class="col">
-        <label for="caregiver.zipCode">ZIP *</label>
-        <input type="text" [(ngModel)]="caregiver.zipCode" />
+
+    <div class="row">
+      <div class="col">
+        <label for="caregiver.phoneNumber">Phone Number *</label>
+        <input id="caregiver.phoneNumber" class="form-control" type="text" [(ngModel)]="caregiver.phoneNumber" />
+        <label for="caregiver.gender">Gender</label>
+        <input id="caregiver.gender" class="form-control" type="text" [(ngModel)]="caregiver.gender" />
+      </div>
+      <div class="col">
+        <label for="caregiver.maritalStatus">Marital Status</label>
+        <input id="caregiver.maritalStatus" class="form-control" type="text" [(ngModel)]="caregiver.maritalStatus" />
+      </div>
+      <div class="col-2">
+        <label for="caregiver.primaryLanguage">Primary Language</label>
+        <input id="caregiver.primaryLanguage" class="form-control" type="text" [(ngModel)]="caregiver.primaryLanguage" />
+      </div>
     </div>
-  </div>
 
   <!-- <div class="row">
     <div class="col">
@@ -90,6 +104,7 @@
 
     </div>
   </div> -->
+  </form>
 </div>
 
 <button type="button" class="btn btn-success" (click)="onSubmit()">SUBMIT</button>

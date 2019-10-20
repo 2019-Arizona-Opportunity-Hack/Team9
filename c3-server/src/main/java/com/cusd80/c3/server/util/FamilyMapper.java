@@ -3,15 +3,17 @@ package com.cusd80.c3.server.util;
 import com.cusd80.c3.api.model.Caregiver;
 import com.cusd80.c3.api.model.Dependent;
 import com.cusd80.c3.api.model.Family;
+import com.cusd80.c3.api.model.IncomeType;
 import com.cusd80.c3.server.entity.MemberEntity;
 import com.cusd80.c3.server.enums.MemberType;
+import org.apache.commons.lang3.StringUtils;
+import org.glassfish.jersey.internal.inject.ParamConverters;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class FamilyMapper {
 
@@ -86,7 +88,14 @@ public class FamilyMapper {
 
         member.setType(MemberType.PRIMARY);
         member.setUpdateDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
-        //todo: add income type
+
+        //inefficient but works...having some trouble getting the conversion right so went with a loop
+        HashSet<String> set = new HashSet<String>();
+        for (IncomeType incomeType: family.getCaregiver().getIncomeTypes()) {
+            set.add(incomeType.toString());
+        }
+
+        member.setIncomeTypes(set);
 
         //this is crap code but i dont care.
         if (family.getCaregiver().getPerson().getDateOfBirth() == null) {

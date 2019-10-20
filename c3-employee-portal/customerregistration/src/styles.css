@@ -37,7 +37,6 @@ img .imageFit {
   font-size: 48px;
   text-align: center;
   margin: 15px 0;
-  padding-bottom: 30px;
 }
 
 .inPageSubHeader{
@@ -54,6 +53,7 @@ img .imageFit {
 
 #mainForm label {
   display: block;
+  margin-bottom: 5px;
 }
 
 #mainForm .row {
@@ -65,4 +65,9 @@ img .imageFit {
   margin: 10px 20px;
   padding: 46px 34px;
   cursor: pointer;
+}
+
+.btn-green {
+  background-color: #00580E;
+  color: #FFFFFF;
 }
