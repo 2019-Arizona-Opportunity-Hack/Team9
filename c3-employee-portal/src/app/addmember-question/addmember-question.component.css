@@ -1,13 +1,9 @@
 .large-box-button {
-    width: 424.7px;
-    height: 260px;
-    margin: 30px;
+    width: 400px;
+    height: 200px;
     font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 35px;
-    align-items: center;
+    font-weight: bold;
+    font-size: 38px;
     text-align: center;
     color: white;
 }
