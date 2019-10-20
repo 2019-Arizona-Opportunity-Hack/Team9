@@ -18,7 +18,7 @@
     <dependency>
       <groupId>com.cusd80.c3</groupId>
       <artifactId>c3-server-api</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
