@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Member } from '../../models/member';
 
 @Component({
   selector: 'app-addmember',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./addmember.component.scss']
 })
 export class AddmemberComponent implements OnInit {
+  public member: Member;
 
   constructor() { }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Member } from 'src/models/member';
 
@@ -23,6 +23,6 @@ export class AddmembersComponent implements OnInit {
   public onAddAnother() {
     this.members.push(new Member());
 
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, 9999);
   }
 }
