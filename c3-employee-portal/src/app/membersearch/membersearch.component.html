@@ -13,11 +13,11 @@
       <input type="text" [(ngModel)]="dateOfBirth" />
     </div>
     <div class="col align-items-center">
-      <button class="btn btn-success" (click)="memberSearch()">Search</button>
+      <button class="btn btn-green" (click)="memberSearch()">Search</button>
     </div>
 </div>
 
-<div *ngIf="results.length > 0" class="inPageSubHeader">{{results.length}} Results</div>
+<div *ngIf="results.length > 0" class="inPageSubHeader" style="text-align: left;">{{results.length}} Results</div>
 
 <div class="container">
   <div *ngIf="results.length > 0">
@@ -34,6 +34,6 @@
     </div>
   </div>
 
-  <app-member-search-result *ngFor="let result of results"></app-member-search-result>
+  <app-member-search-result *ngFor="let result of results" [result]="result"></app-member-search-result>
 
 </div>
