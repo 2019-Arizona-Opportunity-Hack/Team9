@@ -12,7 +12,7 @@ export class ReportServiceSelectorComponent implements OnInit {
   selected: Service = null;
   services;
 
-  constructor(private _router: Router, private c3services: C3ApiService) { }
+  constructor(private router: Router, private c3services: C3ApiService) { }
 
   ngOnInit() {
     this.c3services.getServices().subscribe(results => this.services = results);
@@ -28,6 +28,6 @@ export class ReportServiceSelectorComponent implements OnInit {
 
   onNextClick() {
     sessionStorage.setItem('selectedReportService', JSON.stringify(this.selected, null, 4));
-    this._router.navigate(['reportrun']);
+    this.router.navigate(['reportrun']);
   }
 }

@@ -2,19 +2,15 @@
 
 <div class="inPageHeader">Report Generator</div>
 
+<div class="inPageSubHeader">SELECT DATE RANGE</div>
+<br />
+
 <div class="container text-center">
-  <div style="text-align: left; margin-bottom: 20px;">SELECT DATE RANGE:</div>
-
   <div class="row">
-    <div class="col-2" style="text-align: left;"><label>START DATE:</label></div>
-    <div class="col-4" style="text-align: left;"><input type="text" [(ngModel)]="startDate" /></div>
-  </div>
-  <div class="row">
-    <div class="col-2" style="text-align: left;"><label>END DATE:</label></div>
-    <div class="col-4" style="text-align: left;"><input type="text" [(ngModel)]="endDate" /></div>
-  </div>
-
-  <div style="text-align: right;">
-    <button id="service-button" type="button" class="btn btn-green" (click)="onGenerate()">Generate</button>
+    <div class="col-2"><label style="padding-top:5px">START DATE:</label></div>
+    <div class="col-3"><input type="text" class="form-control" placeholder="MM/DD/YYYY"></div>
+    <div class="col-2"><label style="padding-top:5px">END DATE:</label></div>
+    <div class="col-3"><input type="text" class="form-control" placeholder="MM/DD/YYYY"></div>
+    <div class="col"><button id="service-button" type="button" class="btn btn-green" (click)="onGenerate()">Generate</button></div>
   </div>
 </div>

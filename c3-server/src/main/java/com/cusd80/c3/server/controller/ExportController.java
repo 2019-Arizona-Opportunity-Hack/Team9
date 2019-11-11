@@ -2,9 +2,12 @@ package com.cusd80.c3.server.controller;
 
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -16,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
@@ -23,7 +27,11 @@ import com.cusd80.c3.api.ExportApi;
 import com.cusd80.c3.server.repo.CheckInRepository;
 import com.cusd80.c3.server.repo.MemberRepository;
 import com.cusd80.c3.server.repo.ServiceRepository;
+import com.cusd80.c3.server.util.DateUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @Transactional
 @RequestMapping("export")
@@ -57,6 +65,57 @@ public class ExportController implements ExportApi {
             ) {
                 for (var rec : serviceRepository.findAll()) {
                     csv.printRecord(rec.getId(), rec.getName(), rec.getSortOrder(), rec.isEnabled());
+                }
+            }
+        });
+    }
+
+    @RequestMapping(path = "report.csv", method = RequestMethod.GET, produces = CSV_VALUE)
+    public ResponseEntity<StreamingResponseBody> exportReport(
+        @Valid @RequestParam("service_id") String serviceId,
+        @Valid @RequestParam("start_date") String startDate,
+        @Valid @RequestParam("end_date") String endDate
+    )
+    {
+        return ResponseEntity.ok().contentType(CSV).body(out -> {
+            var s = DateUtil.parseDate(startDate).atStartOfDay(ZoneId.systemDefault()).toLocalDateTime();
+            var e = DateUtil.parseDate(endDate).plusDays(1).atStartOfDay(ZoneId.systemDefault()).toLocalDateTime();
+            log.info("s: {}", s);
+            log.info("s: {}", s);
+            var res = checkInRepository.findByServiceIdAndDateBetweenOrderByDate(serviceId, s, e);
+            log.info("res: {}", res.size());
+            try (
+                var csv = new CSVPrinter(
+                    new OutputStreamWriter(out, StandardCharsets.ISO_8859_1),
+                    CSVFormat.EXCEL.withHeader(
+                        "first_name",
+                        "last_name",
+                        "service_id",
+                        "service_name",
+                        "check_in_date",
+                        "gender",
+                        "ethnicity",
+                        "age"
+                    )
+                )
+            ) {
+                for (var checkIn : res) {
+                    log.info("checkIn: ", checkIn);
+                    var rec = memberRepository.findById(checkIn.getMemberId()).orElse(null);
+                    if (rec != null) {
+                        csv.printRecord(
+                            rec.getFirstName(),
+                            rec.getLastName(),
+                            serviceId,
+                            null,
+                            checkIn.getDate(),
+                            rec.getGender(),
+                            rec.getEthnicity(),
+                            rec.getBirthDate() != null
+                                ? Math.abs(LocalDate.now().getYear() - rec.getBirthDate().getYear())
+                                : null
+                        );
+                    }
                 }
             }
         });
