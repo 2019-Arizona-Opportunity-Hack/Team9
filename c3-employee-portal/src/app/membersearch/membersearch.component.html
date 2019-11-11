@@ -6,15 +6,15 @@
   <div class="row">
     <div class="col">
       <label for="lastName">Last Name</label>
-      <input id="lastName" name="lastName" class="form-control" type="text" />
+      <input id="lastName" [(ngModel)]="lastName" class="form-control" type="text" />
     </div>
     <div class="col">
       <label for="dateOfBirth">Date of Birth (MM/DD/YYYY)</label>
-      <input id="dateOfBirth" name="dateOfBirth" class="form-control" type="text" />
+      <input id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" type="text" />
     </div>
     <div class="col">
       <label for="phoneNumber">Phone Number</label>
-      <input id="phoneNumber" name="phoneNumber" class="form-control" type="text" />
+      <input id="phoneNumber" [(ngModel)]="phoneNumber" class="form-control" type="text" />
     </div>
     <div class="col-2 align-items-center">
       <br />
@@ -22,8 +22,8 @@
     </div>
   </div>
 
-  <div *ngIf="results.length > 0" class="inPageSubHeader" style="text-align: left;">{{results.length}} Results</div>
-  <div *ngIf="results.length > 0">
+  <div *ngIf="results" class="inPageSubHeader" style="text-align: left;">{{results.length}} Results</div>
+  <div *ngIf="results">
     <div class="row">
       <div class="col-5">
         <label>Last Name</label>
@@ -39,5 +39,3 @@
   <app-member-search-result class="members-list" *ngFor="let result of results" [result]="result"></app-member-search-result>
 
 </div>
-
-

@@ -29,6 +29,10 @@ const routes: Routes = [
     component: PrimaryhouseholdComponent
   },
   {
+    path: 'primaryhousehold/:id',
+    component: PrimaryhouseholdComponent
+  },
+  {
     path: 'addmemberquestion',
     component: AddmemberQuestionComponent
   },

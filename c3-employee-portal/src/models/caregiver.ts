@@ -1,31 +1,15 @@
+import { Person } from './person';
+import { Address } from './address';
+
 export class Caregiver {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  phoneNumber: string;
-  gender: string;
-  maritalStatus: string;
-  primaryLanguage: string;
-  ethnicity: string;
-  selfIdentifiesAs: string;
-  housingType: string;
-  highestEducation: string;
-  employmentType: string;
-  monthlyIncome: number;
-  incomeType: string;
-  csfp: boolean;
-  wic: boolean;
-  snap: boolean;
-  tanf: boolean;
-  des: boolean;
-  qualityFirst: boolean;
-  other: boolean;
-  medicalInsuranceType: string;
-  hasPrimaryDoctor: string;
-  dentalInsurance: string;
-  childCareType: string;
+  caregiver_id: string;
+  person: Person;
+  address: Address;
+  marital_status: string;
+  housing_type: string;
+  education_level: string;
+  employment_type: string;
+  income_amount: number;
+  income_types: string[];
+  child_care_type: string;
 }

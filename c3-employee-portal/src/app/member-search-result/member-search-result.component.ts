@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Member } from 'src/models/member';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-search-result',
@@ -9,12 +10,12 @@ import { Member } from 'src/models/member';
 export class MemberSearchResultComponent implements OnInit {
   @Input() result: Member;
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
   }
 
-  public memberSelect(lastName) {
-    console.log('in member select: ' + lastName);
+  public memberSelect(id) {
+    this._router.navigate(['primaryhousehold', { id }]);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/models/member';
+import { C3ApiService } from '../c3-api.service';
 
 @Component({
   selector: 'app-membersearch',
@@ -9,24 +10,18 @@ import { Member } from 'src/models/member';
 export class MembersearchComponent implements OnInit {
   lastName = '';
   dateOfBirth = '';
-  results: Member[] = [];
+  phoneNumber = '';
+  results;
 
-  constructor() { }
+  constructor(private c3services: C3ApiService) { }
 
   ngOnInit() {
   }
 
   public memberSearch() {
-    this.results = [];
-    const member = new Member();
-    member.lastName = 'test';
-    member.dateOfBirth = new Date('1/1/2018');
-    this.results.push(member);
+    this.c3services.getFamilies(this.lastName, this.dateOfBirth, this.phoneNumber).subscribe(families => this.results = families);
 
-    const member2 = new Member();
-    member2.lastName = 'test2';
-    member2.dateOfBirth = new Date('2/2/2018');
-    this.results.push(member2);
+    console.log(this.results);
   }
 
 }

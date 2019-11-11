@@ -16,7 +16,6 @@ export class ReportServiceSelectorComponent implements OnInit {
 
   ngOnInit() {
     this.c3services.getServices().subscribe(results => this.services = results);
-    console.log(this.services);
   }
 
   select(service) {

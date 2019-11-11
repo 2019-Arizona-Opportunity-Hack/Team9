@@ -6,31 +6,31 @@
   <form>
     <div class="row">
       <div class="col">
-        <label for="caregiver.lastName">Caregiver Last Name *</label>
-        <input id="caregiver.lastName" name="caregiver.lastName" class="form-control" type="text" [(ngModel)]="caregiver.lastName" />
+        <label for="caregiver.person.last_name">Caregiver Last Name *</label>
+        <input id="caregiver.person.last_name" name="caregiver.person.last_name" class="form-control" type="text" [(ngModel)]="caregiver.person.last_name" />
       </div>
       <div class="col">
-        <label for="caregiver.firstName">Caregiver First Name *</label>
-        <input id="caregiver.firstName" name="caregiver.firstName" class="form-control" type="text" [(ngModel)]="caregiver.firstName" />
+        <label for="caregiver.person.first_name">Caregiver First Name *</label>
+        <input id="caregiver.person.first_name" name="caregiver.person.first_name" class="form-control" type="text" [(ngModel)]="caregiver.person.first_name" />
       </div>
       <div class="col-2">
-        <label for="caregiver.dateOfBirth">Caregiver DOB *</label>
-        <input id="caregiver.dateOfBirth" name="caregiver.dateOfBirth" class="form-control" type="text" [(ngModel)]="caregiver.dateOfBirth" />
+        <label for="caregiver.person.date_of_birth">Caregiver DOB *</label>
+        <input id="caregiver.person.date_of_birth" name="caregiver.person.date_of_birth" class="form-control" type="text" [(ngModel)]="caregiver.person.date_of_birth" />
       </div>
     </div>
 
     <div class="row">
       <div class="col">
-        <label for="caregiver.address">Caregiver Address *</label>
-        <input id="caregiver.address" name="caregiver.address" class="form-control" type="text" [(ngModel)]="caregiver.address" />
+        <label for="caregiver.address.address_line_1">Caregiver Address *</label>
+        <input id="caregiver.address.address_line_1" name="caregiver.address.address_line_1" class="form-control" type="text" [(ngModel)]="caregiver.address.address_line_1" />
       </div>
       <div class="col-3">
-        <label for="caregiver.city">City *</label>
-        <input id="caregiver.city" name="caregiver.city" class="form-control" type="text" [(ngModel)]="caregiver.city" />
+        <label for="caregiver.address.city">City *</label>
+        <input id="caregiver.address.city" name="caregiver.address.city" class="form-control" type="text" [(ngModel)]="caregiver.address.city" />
       </div>
       <div class="col-2">
-        <label for="caregiver.state">State *</label>
-        <select id="caregiver.state" name="caregiver.state" class="form-control" [(ngModel)]="caregiver.state">
+        <label for="caregiver.address.state">State *</label>
+        <select id="caregiver.address.state" name="caregiver.address.state" class="form-control" [(ngModel)]="caregiver.address.state">
           <option></option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
@@ -86,27 +86,27 @@
         </select>
       </div>
       <div class="col-2">
-        <label for="caregiver.zipCode">Zip Code *</label>
-        <input id="caregiver.zipCode" name="caregiver.zipCode" class="form-control" type="text" [(ngModel)]="caregiver.zipCode" />
+        <label for="caregiver.address.zip">Zip Code *</label>
+        <input id="caregiver.address.zip" name="caregiver.address.zip" class="form-control" type="text" [(ngModel)]="caregiver.address.zip" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-3">
-        <label for="caregiver.phoneNumber">Phone Number *</label>
-        <input id="caregiver.phoneNumber" name="caregiver.phoneNumber" class="form-control" type="text" [(ngModel)]="caregiver.phoneNumber" />
+        <label for="caregiver.address.phone">Phone Number *</label>
+        <input id="caregiver.address.phone" name="caregiver.address.phone" class="form-control" type="text" [(ngModel)]="caregiver.address.phone" />
       </div>
       <div class="col-2">
-        <label for="caregiver.gender">Gender</label>
-        <select id="caregiver.gender" name="caregiver.gender" class="form-control" [(ngModel)]="caregiver.gender">
+        <label for="caregiver.person.gender">Gender</label>
+        <select id="caregiver.person.gender" name="caregiver.person.gender" class="form-control" [(ngModel)]="caregiver.person.gender">
           <option></option>
           <option>Male</option>
           <option>Female</option>
         </select>
       </div>
       <div class="col">
-        <label for="caregiver.maritalStatus">Marital Status</label>
-        <select id="caregiver.maritalStatus" name="caregiver.maritalStatus" class="form-control" [(ngModel)]="caregiver.maritalStatus">
+        <label for="caregiver.marital_status">Marital Status</label>
+        <select id="caregiver.marital_status" name="caregiver.marital_status" class="form-control" [(ngModel)]="caregiver.marital_status">
           <option></option>
           <option>Single</option>
           <option>Married</option>
@@ -117,8 +117,8 @@
         </select>
       </div>
       <div class="col-2">
-        <label for="caregiver.primaryLanguage">Primary Language</label>
-        <select id="caregiver.primaryLanguage" name="caregiver.primaryLanguage" class="form-control" [(ngModel)]="caregiver.primaryLanguage">
+        <label for="caregiver.person.primary_language">Primary Language</label>
+        <select id="caregiver.person.primary_language" name="caregiver.person.primary_language" class="form-control" [(ngModel)]="caregiver.person.primary_language">
           <option></option>
           <option>English</option>
           <option>Spanish</option>
@@ -129,8 +129,8 @@
 
     <div class="row">
       <div class="col">
-        <label for="caregiver.ethnicity">Caregiver Ethnicity</label>
-        <select id="caregiver.ethnicity" name="caregiver.ethnicity" class="form-control" [(ngModel)]="caregiver.ethnicity">
+        <label for="caregiver.person.ethnicity_type">Caregiver Ethnicity</label>
+        <select id="caregiver.person.ethnicity_type" name="caregiver.person.ethnicity_type" class="form-control" [(ngModel)]="caregiver.person.ethnicity_type">
           <option></option>
           <option>White</option>
           <option>Black</option>
@@ -140,8 +140,8 @@
         </select>
       </div>
       <div class="col">
-        <label for="caregiver.selfIdentifiesAs">Self-Identifies As</label>
-        <select id="caregiver.selfIdentifiesAs" name="caregiver.selfIdentifiesAs" class="form-control" [(ngModel)]="caregiver.selfIdentifiesAs">
+        <label for="caregiver.person.self_identifies_as">Self-Identifies As</label>
+        <select id="caregiver.person.self_identifies_as" name="caregiver.person.self_identifies_as" class="form-control" [(ngModel)]="caregiver.person.self_identifies_as">
           <option></option>
           <option>Male</option>
           <option>Female</option>
@@ -149,8 +149,8 @@
         </select>
       </div>
       <div class="col-2">
-        <label for="caregiver.housingType">Housing Type</label>
-        <select id="caregiver.housingType" name="caregiver.housingType" class="form-control" [(ngModel)]="caregiver.housingType">
+        <label for="caregiver.housing_type">Housing Type</label>
+        <select id="caregiver.housing_type" name="caregiver.housing_type" class="form-control" [(ngModel)]="caregiver.housing_type">
           <option></option>
           <option>Emergency Shelter/Mission/Transitional</option>
           <option>Evacuee</option>
@@ -162,8 +162,8 @@
 
     <div class="row">
       <div class="col-5">
-        <label for="caregiver.highestEducation">Highest Education Completed</label>
-        <select id="caregiver.highestEducation" name="caregiver.highestEducation" class="form-control" [(ngModel)]="caregiver.highestEducation">
+        <label for="caregiver.education_level">Highest Education Completed</label>
+        <select id="caregiver.education_level" name="caregiver.education_level" class="form-control" [(ngModel)]="caregiver.education_level">
           <option></option>
           <option>Grades 0-8</option>
           <option>Grades 9-11</option>
@@ -179,8 +179,8 @@
         </select>
       </div>
       <div class="col-5">
-        <label for="caregiver.employmentType">Employment Type</label>
-        <select id="caregiver.employmentType" name="caregiver.employmentType" class="form-control" [(ngModel)]="caregiver.employmentType">
+        <label for="caregiver.employment_type">Employment Type</label>
+        <select id="caregiver.employment_type" name="caregiver.employment_type" class="form-control" [(ngModel)]="caregiver.employment_type">
           <option></option>
           <option>Post Secondary Student</option>
           <option>Full-Time</option>
@@ -233,15 +233,15 @@
         </div>
       </div>
       <div class="col-5">
-        <label for="caregiver.monthlyIncome">Monthly Income Amount ($)</label>
-        <input id="caregiver.monthlyIncome" name="caregiver.monthlyIncome" class="form-control" type="text" [(ngModel)]="caregiver.monthlyIncome" />
+        <label for="caregiver.income_amount">Monthly Income Amount ($)</label>
+        <input id="caregiver.income_amount" name="caregiver.income_amount" class="form-control" type="text" [(ngModel)]="caregiver.income_amount" />
       </div>
     </div>
 
     <div class="row">
       <div class="col">
         <label for="caregiver.medicalInsuranceType">Medical Insurance Type</label>
-        <select id="caregiver.medicalInsuranceType" name="caregiver.medicalInsuranceType" class="form-control" [(ngModel)]="caregiver.medicalInsuranceType">
+        <select id="caregiver.medicalInsuranceType" name="caregiver.medicalInsuranceType" class="form-control">
           <option></option>
           <option>Employer</option>
           <option>Private</option>
@@ -256,12 +256,12 @@
         <label>Do You Have Primary Doctor?</label>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.medicalInsuranceType" value="yes" class="form-check-input" [(ngModel)]="caregiver.hasPrimaryDoctor"> Yes
+            <input type="radio" name="caregiver.medicalInsuranceType" value="yes" class="form-check-input" [(ngModel)]="caregiver.person.has_primary_care_provider"> Yes
           </label>
         </div>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.medicalInsuranceType" value="no" class="form-check-input" [(ngModel)]="caregiver.hasPrimaryDoctor"> No
+            <input type="radio" name="caregiver.medicalInsuranceType" value="no" class="form-check-input" [(ngModel)]="caregiver.person.has_primary_care_provider"> No
           </label>
         </div>
       </div>
@@ -269,12 +269,12 @@
         <label>Dental Insurance?</label>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.dentalInsurance" value="yes" class="form-check-input" [(ngModel)]="caregiver.dentalInsurance"> Yes
+            <input type="radio" name="caregiver.dentalInsurance" value="yes" class="form-check-input"> Yes
           </label>
         </div>
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" name="caregiver.dentalInsurance" value="no" class="form-check-input" [(ngModel)]="caregiver.dentalInsurance"> No
+            <input type="radio" name="caregiver.dentalInsurance" value="no" class="form-check-input"> No
           </label>
         </div>
       </div>
@@ -282,8 +282,8 @@
 
     <div class="row">
       <div class="col-5">
-        <label for="caregiver.childCareType">Child Care Type</label>
-        <select id="caregiver.childCareType" name="caregiver.childCareType" class="form-control" [(ngModel)]="caregiver.childCareType">
+        <label for="caregiver.child_care_type">Child Care Type</label>
+        <select id="caregiver.child_care_type" name="caregiver.child_care_type" class="form-control" [(ngModel)]="caregiver.child_care_type">
           <option></option>
           <option>Parent/Partner Care</option>
           <option>Head Start</option>
